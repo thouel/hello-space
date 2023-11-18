@@ -13,7 +13,7 @@ export const fetchPictures = async (page: number) => {
   startDate.setDate(currentDate.getDate() - perPage * page)
 
   var res = initPicturesResult()
-  await fetch(`/api/feed`, {
+  await fetch(`${getBaseUrl()}/api/feed`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
