@@ -1,8 +1,5 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Navbar from '@/components/main/Navbar'
-import { NAVBAR_HEIGHT } from '@/constants'
-import ToastProvider from '@/providers/ToastProvider'
 
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'

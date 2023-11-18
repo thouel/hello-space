@@ -48,8 +48,8 @@ describe('Test the /api/feed route', () => {
       url: '/api/feed',
       body: JSON.stringify({
         token: Cypress.env('APP_TOKEN'),
-        startDate: startDate,
-        endDate: endDate,
+        start: startDate,
+        end: endDate,
       }),
       failOnStatusCode: false,
     }).then(({ status, body }) => {
@@ -69,8 +69,8 @@ describe('Test the /api/feed route', () => {
       url: '/api/feed',
       body: JSON.stringify({
         token: Cypress.env('APP_TOKEN'),
-        startDate: startDate,
-        endDate: endDate,
+        start: startDate,
+        end: endDate,
       }),
       failOnStatusCode: false,
     }).then(({ status, body }) => {

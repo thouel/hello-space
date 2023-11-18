@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
-import { Result, initResult } from '..'
-import NasaApiClient from '../NasaApiClient'
+import { PicturesResult, initPicturesResult } from '../../types'
+import NasaApiClient from '../lib/NasaApiClient'
 
 export async function POST(request: Request) {
-  var res: Result = initResult()
+  var res: PicturesResult = initPicturesResult()
   try {
     const body = await request.json()
     const { start, end } = body

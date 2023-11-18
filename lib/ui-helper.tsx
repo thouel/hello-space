@@ -1,8 +1,8 @@
-export const isTokenAuthorized = (token: string) => {
+export function isTokenAuthorized(token: string) {
   return process.env.APP_TOKEN === token
 }
 
-export const getBaseUrl = () => {
+export function getBaseUrl() {
   // if window is not undefined, we are running in the browser env (client side)
   if (typeof window !== 'undefined') return ''
 
@@ -15,4 +15,18 @@ export const getBaseUrl = () => {
     res = `${process.env.LOCAL_URL}`
   }
   return res
+}
+
+export function strToDate(str: string): Date {
+  // Split the string into an array of [year, month, day]
+  const [year, month, day] = str.split('-')
+
+  // Create a new Date object using the components
+  const dateObject = new Date(
+    parseInt(year, 10),
+    parseInt(month, 10) - 1,
+    parseInt(day, 10),
+  )
+
+  return dateObject
 }

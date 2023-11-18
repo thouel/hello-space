@@ -1,16 +1,17 @@
 'use server'
-import { PicturesResult, initPicturesResult } from '@/app/api'
-import { QueryKey } from '@tanstack/react-query'
-import { getBaseUrl } from './ui-helper'
+import { PicturesResult, initPicturesResult } from '@/app/types'
+import { getBaseUrl } from '../lib/ui-helper'
 
-export const fetchPictures = async ({
-  queryKey,
-}: {
-  queryKey: QueryKey
-}): Promise<PicturesResult> => {
-  const { startDate, endDate } = queryKey[1]
+export const fetchPictures = async (page: number) => {
+  console.log(`fetchPictures with (${page})`)
+  const perPage = 5
 
-  console.log(`fetchPictures with (${startDate}, ${endDate})`)
+  const currentDate = new Date()
+  const endDate = new Date()
+  endDate.setDate(currentDate.getDate() - (perPage * (page - 1) + 1))
+  const startDate = new Date()
+  startDate.setDate(currentDate.getDate() - perPage * page)
+
   var res = initPicturesResult()
   await fetch(`${getBaseUrl()}/api/feed`, {
     method: 'POST',
@@ -29,5 +30,5 @@ export const fetchPictures = async ({
       res.data = data
     })
   console.log('fetchPictures', { res })
-  return res
+  return res as PicturesResult
 }
