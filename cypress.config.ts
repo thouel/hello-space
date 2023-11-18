@@ -2,6 +2,7 @@ import { defineConfig } from 'cypress'
 require('dotenv').config({ path: '.env.local' })
 
 export default defineConfig({
+  projectId: 'oktoao',
   e2e: {
     env: { APP_TOKEN: process.env.APP_TOKEN },
     baseUrl: 'http://localhost:3000',
