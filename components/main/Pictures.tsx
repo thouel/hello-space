@@ -16,7 +16,7 @@ export default function Pictures({ pictures }: PicturesProps) {
           .sort(
             (a, b) => strToDate(b.date).getTime() - strToDate(a.date).getTime(),
           )
-          .map((p) => <PictureOfTheDay key={p.date} picture={p} />)
+          .map((p) => <PictureOfTheDay key={p.title} picture={p} />)
       ) : (
         <div className='text-xl font-bold'>No pictures available !!</div>
       )}

@@ -4,10 +4,11 @@ import NasaApiClient from '../lib/NasaApiClient'
 
 export async function POST(request: Request) {
   var res: PicturesResult = initPicturesResult()
+  console.log(`POST /api/feed before parsing body`)
   try {
     const body = await request.json()
     const { start, end } = body
-    console.log(`GET /api/feed with ${start}, ${end}`, { res })
+    console.log(`POST /api/feed with ${start}, ${end}`, { res })
 
     if (start === undefined || end === undefined) {
       throw new Error('No dates found')
@@ -29,7 +30,7 @@ export async function POST(request: Request) {
   } catch (e: any) {
     res.error.message = e.message
   }
-  console.log('res', { res })
+  console.log('POST /api/feed result', { res })
 
   return NextResponse.json(res, {
     status: res.error?.message !== '' ? 400 : 200,

@@ -24,15 +24,14 @@ export default function PictureOfTheDay({ picture }: { picture: Picture }) {
             />
           )}
         </figure>
-        <div className='card-body'>
-          <h2 className='card-title'>{picture.title}</h2>
-          <div className='collapse collapse-arrow'>
-            <input type='checkbox' />
-            <div className='text-base font-medium collapse-title'>
-              History crunch
-            </div>
-            <div className='collapse-content'>{picture.explanation}</div>
-          </div>
+        <div className='card-body collapse collapse-arrow'>
+          <input type='checkbox' />
+          <h2 className='min-h-0 py-0 text-sm card-title collapse-title'>
+            {picture.title}
+          </h2>
+
+          <div className='collapse-content'>{picture.explanation}</div>
+
           <div className='justify-end card-actions'>
             <div className='italic badge badge-ghost'>{picture.date}</div>
           </div>
