@@ -1,4 +1,4 @@
-import { Picture } from '@/app/types'
+import { Picture } from '@/types'
 import Image from 'next/image'
 import React from 'react'
 

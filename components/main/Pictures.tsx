@@ -2,7 +2,7 @@
 
 import { strToDate } from '@/lib/ui-helper'
 import PictureOfTheDay from './PictureOfTheDay'
-import { Picture } from '@/app/types'
+import { Picture } from '@/types'
 
 export interface PicturesProps {
   pictures: Picture[] | null

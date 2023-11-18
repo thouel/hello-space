@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { isTokenAuthorized } from './lib/ui-helper'
-import { Result, initResult } from './app/types'
+import { Result, initResult } from './types'
 
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/api')) {

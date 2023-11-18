@@ -1,5 +1,5 @@
 'use client'
-import { Picture } from '@/app/types'
+import { Picture } from '@/types'
 import { fetchPictures } from '@/actions/ui-fetcher'
 import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
@@ -40,6 +40,7 @@ const LoadMore = () => {
     if (inView) {
       loadMorePictures()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView])
 
   return (

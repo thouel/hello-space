@@ -1,5 +1,5 @@
 'use server'
-import { PicturesResult, initPicturesResult } from '@/app/types'
+import { PicturesResult, initPicturesResult } from '@/types'
 import { getBaseUrl } from '../lib/ui-helper'
 
 export const fetchPictures = async (page: number) => {
@@ -13,7 +13,7 @@ export const fetchPictures = async (page: number) => {
   startDate.setDate(currentDate.getDate() - perPage * page)
 
   var res = initPicturesResult()
-  await fetch(`${getBaseUrl()}/api/feed`, {
+  await fetch(`/api/feed`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

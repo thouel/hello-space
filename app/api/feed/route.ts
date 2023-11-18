@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { PicturesResult, initPicturesResult } from '../../types'
+import { PicturesResult, initPicturesResult } from '../../../types'
 import NasaApiClient from '../lib/NasaApiClient'
 
 export async function POST(request: Request) {

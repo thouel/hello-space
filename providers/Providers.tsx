@@ -1,12 +1,13 @@
-import StateProvider from './StateProvider'
 import ToastProvider from './ToastProvider'
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <StateProvider>
+    <>
+      {/* <StateProvider> */}
       <ToastProvider />
       {children}
-    </StateProvider>
+      {/* </StateProvider> */}
+    </>
   )
 }
 

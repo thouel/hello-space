@@ -3,6 +3,8 @@ import LoadMore from '@/components/sub/LoadMore'
 import { fetchPictures } from '@/actions/ui-fetcher'
 import { toast } from 'react-toastify'
 
+export const dynamic = 'force-dynamic' // Otherwise, nextjs thinks this is a static page that can be generated during build stage
+
 export default async function Home() {
   const pictures = await fetchPictures(1)
 
