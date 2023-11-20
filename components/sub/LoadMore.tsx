@@ -47,7 +47,7 @@ const LoadMore = () => {
     <>
       <Pictures pictures={pictures} />
       <div
-        className='flex items-center justify-center col-span-1 p-4 sm:col-span-2 md:col-span-3'
+        className='flex items-center justify-center col-span-1 p-4'
         ref={ref}
       >
         <Spinner />

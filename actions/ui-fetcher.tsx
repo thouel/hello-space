@@ -1,10 +1,11 @@
 'use server'
 import { PicturesResult, initPicturesResult } from '@/types'
 import { getBaseUrl } from '../lib/ui-helper'
-import { RedirectType, redirect } from 'next/navigation'
 
 export const fetchPictures = async (page: number) => {
   console.log(`fetchPictures with (${page})`)
+  console.log('APP_TOKEN:', process.env.APP_TOKEN)
+
   const perPage = 5
 
   const currentDate = new Date()
@@ -18,7 +19,7 @@ export const fetchPictures = async (page: number) => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      token: process.env.APP_TOKEN2,
+      token: process.env.APP_TOKEN,
       start: startDate,
       end: endDate,
     }),

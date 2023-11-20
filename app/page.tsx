@@ -13,7 +13,7 @@ export default async function Home() {
       <h1 className='mb-4 text-3xl font-bold text-center'>
         Hello Space & Astronomy
       </h1>
-      <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3'>
+      <div className='grid grid-cols-1 gap-4'>
         <Pictures pictures={pictures.data} />
         <LoadMore />
       </div>

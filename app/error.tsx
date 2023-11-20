@@ -35,8 +35,8 @@ export default function Error({
     >
       <div>
         <h1
-          className='border-r-2 border-solid border-r-black/30'
-          style={{
+          className='inline-block pr-6 mr-5 text-xl font-semibold align-top border-r-2 border-solid border-r-black/30'
+          /* style={{
             display: 'inline-block',
             margin: '0px 20px 0px 0px',
             padding: '0px 23px 0px 0px',
@@ -44,23 +44,15 @@ export default function Error({
             fontWeight: '500',
             verticalAlign: 'top',
             lineHeight: '49px',
-          }}
+          }} */
         >
           {error.name}
         </h1>
-        <div className='max-w-xs' style={{ display: 'inline-block' }}>
-          <h2
-            style={{
-              fontSize: '14px',
-              fontWeight: '400',
-              margin: '0px',
-            }}
-          >
-            {error.message}
-          </h2>
+        <div className='inline-block max-w-xs'>
+          <h2 className='text-sm font-normal'>{error.message}</h2>
         </div>
         <button
-          className='justify-center block ml-10 align-center btn-outline'
+          className='justify-center block ml-10 font-medium align-center btn-outline'
           onClick={
             // Attempt to recover by trying to re-render the segment
             () => reset()

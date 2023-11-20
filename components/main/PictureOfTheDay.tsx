@@ -26,7 +26,7 @@ export default function PictureOfTheDay({ picture }: { picture: Picture }) {
         </figure>
         <div className='card-body collapse collapse-arrow'>
           <input type='checkbox' />
-          <h2 className='min-h-0 py-0 text-sm card-title collapse-title'>
+          <h2 className='min-h-0 py-0 text-sm sm:text-xl md:text-2xl card-title collapse-title'>
             {picture.title}
           </h2>
 
