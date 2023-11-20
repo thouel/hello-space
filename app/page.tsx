@@ -17,7 +17,7 @@ export default async function Home() {
         <Pictures pictures={pictures.data} />
         <LoadMore />
       </div>
-      {pictures.error.message != ''
+      {pictures.error && pictures.error?.message != ''
         ? toast.error(pictures.error.message)
         : null}
     </main>

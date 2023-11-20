@@ -1,6 +1,7 @@
 'use server'
 import { PicturesResult, initPicturesResult } from '@/types'
 import { getBaseUrl } from '../lib/ui-helper'
+import { RedirectType, redirect } from 'next/navigation'
 
 export const fetchPictures = async (page: number) => {
   console.log(`fetchPictures with (${page})`)
@@ -17,15 +18,15 @@ export const fetchPictures = async (page: number) => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      token: process.env.APP_TOKEN,
+      token: process.env.APP_TOKEN2,
       start: startDate,
       end: endDate,
     }),
   })
     .then((res) => res.json())
-    .then(({ data, error }) => {
-      if (error?.message != '') {
-        throw new Error(error)
+    .then(({ status, error, data }) => {
+      if (status != 200) {
+        throw new Error(error.message)
       }
       res.data = data
     })

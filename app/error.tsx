@@ -15,16 +15,60 @@ export default function Error({
   }, [error])
 
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
+    // <div className='flex flex-row max-w-sm'>
+    //   <h1 className='pr-6 mr-5 text-2xl font-semibold align-top border-r-2 border-solid border-r-black/30'>
+    //     {error.name}
+    //   </h1>
+    //   <h2 className='inline-block text-sm font-medium'>{error.message}</h2>
+    // </div>
+    <div
+      style={{
+        fontFamily:
+          'system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji',
+        height: '100vh',
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div>
+        <h1
+          className='border-r-2 border-solid border-r-black/30'
+          style={{
+            display: 'inline-block',
+            margin: '0px 20px 0px 0px',
+            padding: '0px 23px 0px 0px',
+            fontSize: '24px',
+            fontWeight: '500',
+            verticalAlign: 'top',
+            lineHeight: '49px',
+          }}
+        >
+          {error.name}
+        </h1>
+        <div className='max-w-xs' style={{ display: 'inline-block' }}>
+          <h2
+            style={{
+              fontSize: '14px',
+              fontWeight: '400',
+              margin: '0px',
+            }}
+          >
+            {error.message}
+          </h2>
+        </div>
+        <button
+          className='justify-center block ml-10 align-center btn-outline'
+          onClick={
+            // Attempt to recover by trying to re-render the segment
+            () => reset()
+          }
+        >
+          Try again
+        </button>
+      </div>
     </div>
   )
 }

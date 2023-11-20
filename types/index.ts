@@ -3,6 +3,7 @@ export interface ErrorResult {
 }
 
 export interface Result {
+  status: number
   error: ErrorResult
   data: any
 }
@@ -24,12 +25,14 @@ export interface PicturesResult extends Result {
 
 export function initPicturesResult(): PicturesResult {
   return {
+    status: 200,
     error: { message: '' },
     data: [],
   }
 }
 export function initResult(): Result {
   return {
+    status: 200,
     error: { message: '' },
     data: {},
   }
