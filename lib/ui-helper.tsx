@@ -1,4 +1,10 @@
 export function isTokenAuthorized(token: string) {
+  console.log(
+    'isTokenAuth',
+    process.env.APP_TOKEN,
+    token,
+    process.env.APP_TOKEN === token,
+  )
   return process.env.APP_TOKEN === token
 }
 
