@@ -6,10 +6,11 @@ describe('Test the /api/feed route', () => {
       body: JSON.stringify({}),
       failOnStatusCode: false,
     }).then(({ status, body }) => {
+      cy.log('' + status, body)
       expect(status).equals(401)
-      expect(body.error).not.to.be.undefined
-      expect(body.error.message).eq('Not authorized')
-      expect(body.data).to.be.empty
+      expect(body.message).not.to.be.undefined
+      expect(body.message).eq('Not authorized')
+      expect(body.data).to.be.undefined
     })
   })
   it('should fail giving feed with unauthorized TOKEN, without startDate and endDate', () => {
@@ -20,9 +21,9 @@ describe('Test the /api/feed route', () => {
       failOnStatusCode: false,
     }).then(({ status, body }) => {
       expect(status).equals(401)
-      expect(body.error).not.to.be.undefined
-      expect(body.error.message).eq('Not authorized')
-      expect(body.data).to.be.empty
+      expect(body.message).not.to.be.undefined
+      expect(body.message).eq('Not authorized')
+      expect(body.data).to.be.undefined
     })
   })
   it('should fail giving feed with authorized TOKEN, without startDate and endDate', () => {
@@ -33,8 +34,8 @@ describe('Test the /api/feed route', () => {
       failOnStatusCode: false,
     }).then(({ status, body }) => {
       expect(status).equals(400)
-      expect(body.error).not.to.be.undefined
-      expect(body.error.message).eq('No dates found')
+      expect(body.message).not.to.be.undefined
+      expect(body.message).eq('No dates found')
       expect(body.data).to.be.empty
     })
   })
@@ -54,8 +55,8 @@ describe('Test the /api/feed route', () => {
       failOnStatusCode: false,
     }).then(({ status, body }) => {
       expect(status).equals(400)
-      expect(body.error).not.to.be.undefined
-      expect(body.error.message).eq('Dates are messed up')
+      expect(body.message).not.to.be.undefined
+      expect(body.message).eq('Dates are messed up')
       expect(body.data).to.be.empty
     })
   })
@@ -75,8 +76,7 @@ describe('Test the /api/feed route', () => {
       failOnStatusCode: false,
     }).then(({ status, body }) => {
       expect(status).equals(200)
-      expect(body.error).not.to.be.undefined
-      expect(body.error.message).to.be.empty
+      expect(body.message).to.be.empty
       expect(body.data).lengthOf(2)
     })
   })

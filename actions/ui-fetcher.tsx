@@ -1,5 +1,6 @@
 'use server'
-import { PicturesResult, initPicturesResult } from '@/types'
+
+import { PicturesResult } from '@/types'
 import { getBaseUrl } from '../lib/ui-helper'
 
 export const fetchPictures = async (page: number) => {
@@ -14,8 +15,8 @@ export const fetchPictures = async (page: number) => {
   const startDate = new Date()
   startDate.setDate(currentDate.getDate() - perPage * page)
 
-  var res = initPicturesResult()
-  await fetch(`${getBaseUrl()}/api/feed`, {
+  let isOk = true
+  const res: PicturesResult = await fetch(`${getBaseUrl()}/api/feed`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -24,13 +25,28 @@ export const fetchPictures = async (page: number) => {
       end: endDate,
     }),
   })
-    .then((res) => res.json())
-    .then(({ status, error, data }) => {
-      if (status != 200) {
-        throw new Error(error.message)
+    .then((res) => {
+      isOk = res.ok
+      return res.json()
+    })
+    .then((body) => {
+      if (!isOk) {
+        console.error(
+          'Error during fetch occured [',
+          body.status,
+          ' - ',
+          body.message,
+          ']',
+        )
+        throw new Error(body.message)
       }
-      res.data = data
+
+      return { isError: false, data: body.data, message: '' }
+    })
+    .catch((e: Error) => {
+      // We catch everything that can wrongly happen
+      return { isError: true, data: [], message: e.message }
     })
   console.log('fetchPictures', { res })
-  return res as PicturesResult
+  return res
 }

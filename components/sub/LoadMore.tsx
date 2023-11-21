@@ -23,16 +23,13 @@ const LoadMore = () => {
 
     const nextPage = page + 1
 
-    const newPictures = (await fetchPictures(nextPage)) ?? []
-    if (newPictures.error.message != '') {
-      toast.error(newPictures.error.message)
+    const { isError, message, data } = await fetchPictures(nextPage)
+    if (isError) {
+      toast.error(message)
       return
     }
 
-    setPictures((prevPictures: Picture[]) => [
-      ...prevPictures,
-      ...newPictures.data,
-    ])
+    setPictures((prevPictures: Picture[]) => [...prevPictures, ...data])
     setPage(nextPage)
   }
 

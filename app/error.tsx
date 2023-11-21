@@ -1,6 +1,6 @@
-'use client' // Error components must be Client Components
+'use client'
 
-import { useEffect } from 'react'
+// Error components must be Client Components
 
 export default function Error({
   error,
@@ -9,18 +9,7 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error)
-  }, [error])
-
   return (
-    // <div className='flex flex-row max-w-sm'>
-    //   <h1 className='pr-6 mr-5 text-2xl font-semibold align-top border-r-2 border-solid border-r-black/30'>
-    //     {error.name}
-    //   </h1>
-    //   <h2 className='inline-block text-sm font-medium'>{error.message}</h2>
-    // </div>
     <div
       style={{
         fontFamily:
@@ -34,18 +23,7 @@ export default function Error({
       }}
     >
       <div>
-        <h1
-          className='inline-block pr-6 mr-5 text-xl font-semibold align-top border-r-2 border-solid border-r-black/30'
-          /* style={{
-            display: 'inline-block',
-            margin: '0px 20px 0px 0px',
-            padding: '0px 23px 0px 0px',
-            fontSize: '24px',
-            fontWeight: '500',
-            verticalAlign: 'top',
-            lineHeight: '49px',
-          }} */
-        >
+        <h1 className='inline-block pr-6 mr-5 text-xl font-semibold align-top border-r-2 border-solid border-r-black/30'>
           {error.name}
         </h1>
         <div className='inline-block max-w-xs'>
