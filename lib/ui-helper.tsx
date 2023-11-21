@@ -9,11 +9,13 @@ export function getBaseUrl() {
   var res = ''
 
   const vc = process.env.VERCEL_URL
+  console.log('getBaseUrl', { vc })
   if (vc) {
     res = `https://${vc}`
   } else {
     res = `${process.env.LOCAL_URL}`
   }
+  console.log('getBaseUrl', { res })
   return res
 }
 
