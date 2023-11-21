@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# my-trendingvids-webapp
 
-## Getting Started
+![NextJS](https://img.shields.io/badge/NextJS-cyan)
+![Next-Auth](https://img.shields.io/badge/NextAuth.js-yellow)
+![TailwindCss](https://img.shields.io/badge/Tailwind--CSS-red)
+![Responsive](https://img.shields.io/badge/Responsive-red)
+![Github](https://img.shields.io/badge/Github-blue)
+![Vercel](https://img.shields.io/badge/Vercel-black)
+[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+![maintained](https://img.shields.io/badge/Maintained%3F-yes-green)
+![ask](https://img.shields.io/badge/Ask_me-anything-green)
+[![Preflight](https://github.com/thouel/hello-space/actions/workflows/preflight.yml/badge.svg)](https://github.com/thouel/hello-space/actions/workflows/preflight.yml)
+[![Vercel Production Deployment](https://github.com/thouel/hello-space/actions/workflows/deploy.yml/badge.svg)](https://github.com/thouel/hello-space/actions/workflows/deploy.yml)
 
-First, run the development server:
+A responsive webapp to feed your head with space & astronomy wonders
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Table of Contents
+
+- [Background](#background)
+- [Install](#install)
+- [Test](#test)
+- [Usage](#usage)
+- [Example](#example)
+- [CI](#ci)
+- [Maintainers](#maintainers)
+- [License](#license)
+
+## Background
+
+App used to keep stepping in dev world. My main focuses were:
+
+- understand the mechanics of a JS react framework : NextJs v14 with the App router does the trick
+- have a responsive designed web application (for mobile and desktop)
+- have an automatic deployment pipeline
+- store data in a cloud database
+- build a continuous integration & deployment pipeline
+
+Using:
+
+- [NextJs @14.0.2](https://nextjs.org/) to organize the app, using the [App Router](https://nextjs.org/docs/app)
+- [Next-Auth](https://next-auth.js.org/getting-started/introduction) to easily setup a signin/signup/signout mechanism with Github provider
+- [TailwindCSS](https://tailwindcss.com/docs/guides/nextjs) for pages styling
+- [Github](https://github.com/thouel/my-trendingvids-webapp/tree/main) to host app sources
+- [GitHub Actions](https://github.com/thouel/my-trendingvids-webapp/actions) to automate continuous integration & fire Vercel deployment
+- [Vercel](https://vercel.com/) to deploy automatically (after each push on main) [@see here](https://my-trendingvids-webapp.vercel.app)
+- [Cypress](https://docs.cypress.io/guides/overview/why-cypress) to write UI and API tests. They are started in [Preflight](https://github.com/thouel/my-trendingvids-webapp/actions/workflows/preflight.yml/) (GitHub Action) before deploying to Vercel
+
+## Install
+
+```
+$ npm i react@latest react-dom@latest next@13.4.19
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Test
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+$ npm run cy:run
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Usage
 
-## Learn More
+We use [APOD Nasa API](https://api.nasa.gov/) to fetch pictures/videos of the day. You need to get your own API key (stored under .env/NASA_API_SECRET) in order to make it work.
 
-To learn more about Next.js, take a look at the following resources:
+```
+$ npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Example
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+[Latest deployment of main branch on Vercel](https://hello-space.vercel.app/)
 
-## Deploy on Vercel
+## CI
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+After each push on _main_ branch, we build, lint, run tests and then build. On success build, we deploy on prod env.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Maintainers
+
+[@https://github.com/thouel](https://github.com/thouel)
+
+## License
+
+MIT © 2023 Thibault Houel
