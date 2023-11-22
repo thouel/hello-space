@@ -1,7 +1,7 @@
 'use client'
 import { Picture } from '@/types'
 import { fetchPictures } from '@/actions/fetchPictures'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { toast } from 'react-toastify'
 import Pictures from '../main/Pictures'
@@ -13,10 +13,13 @@ const LoadMore = () => {
 
   const { ref, inView } = useInView()
 
+  const isLoadingRef = useRef(false)
+
   const delay = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms))
 
   const loadMorePictures = async () => {
+    isLoadingRef.current = true
     toast.info('Loading pictures ...')
 
     await delay(2000)
@@ -31,10 +34,11 @@ const LoadMore = () => {
 
     setPictures((prevPictures: Picture[]) => [...prevPictures, ...data])
     setPage(nextPage)
+    isLoadingRef.current = false
   }
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !isLoadingRef.current) {
       loadMorePictures()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
