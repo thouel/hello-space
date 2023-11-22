@@ -27,12 +27,12 @@ const fetchPictures = async (page: number) => {
     }),
   })
     .then((res) => {
-      log.info(`rcvd ${res}`)
+      log.info(`rcvd res`, { res })
       isOk = res.ok
       return res.json()
     })
     .then((body) => {
-      log.info(`rcvd ${body}`)
+      log.info(`rcvd body`, { body })
       if (!isOk) {
         log.error(
           `Error during fetch occured [${body.status} - ${body.message}]`,
