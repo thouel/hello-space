@@ -2,13 +2,11 @@
 
 import { PicturesResult } from '@/types'
 import { getBaseUrl } from '../lib/ui-helper'
+import { log } from '@logtail/next'
 
 export const fetchPictures = async (page: number) => {
-  console.log(`fetchPictures with (${page})`)
-  console.log('APP_TOKEN:', process.env.APP_TOKEN)
-
+  log.info(`fetchPictures with page = ${page}`)
   const perPage = 5
-
   const currentDate = new Date()
   const endDate = new Date()
   endDate.setDate(currentDate.getDate() - (perPage * (page - 1) + 1))
@@ -31,12 +29,8 @@ export const fetchPictures = async (page: number) => {
     })
     .then((body) => {
       if (!isOk) {
-        console.error(
-          'Error during fetch occured [',
-          body.status,
-          ' - ',
-          body.message,
-          ']',
+        log.error(
+          `Error during fetch occured [${body.status} - ${body.message}]`,
         )
         throw new Error(body.message)
       }
@@ -47,6 +41,6 @@ export const fetchPictures = async (page: number) => {
       // We catch everything that can wrongly happen
       return { isError: true, data: [], message: e.message }
     })
-  console.log('fetchPictures', { res })
+  log.info('fetchPictures', { res })
   return res
 }

@@ -1,9 +1,10 @@
+import { log } from '@logtail/next'
+
 export function isTokenAuthorized(token: string) {
-  console.log(
-    'isTokenAuth',
-    process.env.APP_TOKEN,
-    token,
-    process.env.APP_TOKEN === token,
+  log.info(
+    `'isTokenAuth env=${process.env.APP_TOKEN}, rcvd=${token}, test=${
+      process.env.APP_TOKEN === token
+    }`,
   )
   return process.env.APP_TOKEN === token
 }
@@ -15,13 +16,13 @@ export function getBaseUrl() {
   var res = ''
 
   const vc = process.env.VERCEL_URL
-  console.log('getBaseUrl', { vc })
+  log.debug('getBaseUrl', { vc })
   if (vc) {
     res = `https://${vc}`
   } else {
     res = `${process.env.LOCAL_URL}`
   }
-  console.log('getBaseUrl', { res })
+  log.debug('getBaseUrl', { res })
   return res
 }
 

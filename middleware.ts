@@ -1,17 +1,18 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { isTokenAuthorized } from './lib/ui-helper'
+import { log } from '@logtail/next'
 
 export async function middleware(request: NextRequest) {
-  console.log('in middleware', request.nextUrl.pathname)
+  log.debug('in middleware', { pathname: request.nextUrl.pathname })
   if (request.nextUrl.pathname.startsWith('/api')) {
-    console.log('in middleware, getting token from request', { request })
+    log.debug('in middleware, getting token from request', { request })
     const { token } = await request.json()
-    console.log('in middleware, checking token', token)
+    log.debug('in middleware, checking token', token)
     // We do not throw an exception from there because it would
     // fail the response preparation in the fetch().then().then()
     // sequence. Instead we build a correct json response
     if (!isTokenAuthorized(token)) {
-      console.log('in middleware, exiting with 401')
+      log.debug('in middleware, exiting with 401')
       const res = { message: 'Not authorized' }
       return NextResponse.json(res, { status: 401 })
     }
