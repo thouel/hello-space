@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { log } from '@logtail/next'
+import Providers from '@/providers/Providers'
 
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
-import Providers from '@/providers/Providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +18,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  log.info('Render RootLayout')
   return (
     <html lang='en' data-theme='lofi'>
       <body

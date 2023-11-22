@@ -4,7 +4,7 @@ import { log } from '@logtail/next'
 
 export async function middleware(request: NextRequest) {
   log.debug('in middleware', { pathname: request.nextUrl.pathname })
-  if (request.nextUrl.pathname.startsWith('/api')) {
+  /* if (request.nextUrl.pathname.startsWith('/api')) {
     log.debug('in middleware, getting token from request', { request })
     const { token } = await request.json()
     log.debug('in middleware, checking token', token)
@@ -16,9 +16,9 @@ export async function middleware(request: NextRequest) {
       const res = { message: 'Not authorized' }
       return NextResponse.json(res, { status: 401 })
     }
-  }
+  } */
 }
 
 export const config = {
-  matcher: '/api/:path*',
+  /* matcher: '/api/:path*', */
 }

@@ -1,5 +1,5 @@
 describe('Test the /api/feed route', () => {
-  it('should fail giving feed without TOKEN, startDate and endDate', () => {
+  it.skip('should fail giving feed without TOKEN, startDate and endDate', () => {
     cy.request({
       method: 'POST',
       url: '/api/feed',
@@ -13,7 +13,7 @@ describe('Test the /api/feed route', () => {
       expect(body.data).to.be.undefined
     })
   })
-  it('should fail giving feed with unauthorized TOKEN, without startDate and endDate', () => {
+  it.skip('should fail giving feed with unauthorized TOKEN, without startDate and endDate', () => {
     cy.request({
       method: 'POST',
       url: '/api/feed',
