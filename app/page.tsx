@@ -27,7 +27,9 @@ const fetchPictures = async (page: number) => {
     }),
   })
     .then((res) => {
-      log.info(`rcvd res`, { res })
+      log.info(`rcvd res`, {
+        res: { ok: res.ok, status: res.status, statusText: res.statusText },
+      })
       isOk = res.ok
       return res.json()
     })
