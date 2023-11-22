@@ -12,6 +12,9 @@ const nextConfig = {
       },
     ],
   },
+  compiler: {
+    removeConsole: false,
+  },
 }
 
 module.exports = withLogtail(nextConfig)

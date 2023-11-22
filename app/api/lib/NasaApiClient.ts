@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+import { log } from '@logtail/next'
+
 interface NasaApiProps {
   method: string
   url: string
@@ -39,7 +41,7 @@ export default class NasaApiClient {
 
   async fetchRange(startDate: Date, endDate: Date): Promise<any> {
     const url: string = this.buildQuery(startDate, endDate)
-    console.log('calling', { url })
+    log.info('calling', { url })
     try {
       return await fetch(url, { method: this.props.method })
     } catch (e) {

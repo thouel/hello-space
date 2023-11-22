@@ -4,8 +4,8 @@ import { PicturesResult } from '@/types'
 import { log } from '@logtail/next'
 
 export async function POST(request: Request) {
-  var res: PicturesResult = new PicturesResult()
   log.info(`POST /api/feed before parsing body`)
+  var res: PicturesResult = new PicturesResult()
   try {
     const body = await request.json()
     const { start, end } = body

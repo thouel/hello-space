@@ -39,10 +39,12 @@ jobs:
         run: |
           vercel env rm NASA_API_SECRET production --yes --token=${{ secrets.VERCEL_TOKEN }}
           vercel env rm APP_TOKEN production --yes --token=${{ secrets.VERCEL_TOKEN }}
+          vercel env rm NODE_OPTIONS production --yes --token=${{ secrets.VERCEL_TOKEN }}
       - name: Push environment variable to Vercel
         run: |
           echo -n ${{ secrets.NASA_API_SECRET }} | vercel env add NASA_API_SECRET production --token=${{ secrets.VERCEL_TOKEN }}
           echo -n ${{ secrets.APP_TOKEN }} | vercel env add APP_TOKEN production --token=${{ secrets.VERCEL_TOKEN }}
+          echo -n ${{ vars.NODE_OPTIONS }} | vercel env add NODE_OPTIONS production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Pull Vercel Environment Information
         run: vercel env pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Pull Vercel Information
