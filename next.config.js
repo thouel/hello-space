@@ -15,6 +15,11 @@ const nextConfig = {
   compiler: {
     removeConsole: false,
   },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
 }
 
 module.exports = withLogtail(nextConfig)
