@@ -53,7 +53,7 @@ const fetchPictures = async (page: number) => {
 }
 
 export default async function Home() {
-  const { message } = await fetch(`${getBaseUrl()}/api/test`)
+  const { message } = await fetch(`${getBaseUrl()}/api/jstest`)
     .then((res) => res.json())
     .then((body) => body)
   log.info(`message rcvd '${message}'`)
