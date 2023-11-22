@@ -9,14 +9,8 @@ export type Picture = {
   title: string
 }
 
-export class PicturesResult {
+export type PicturesResult = {
   message: string
   data: Picture[]
   isError: boolean
-
-  constructor() {
-    this.message = ''
-    this.data = []
-    this.isError = false
-  }
 }

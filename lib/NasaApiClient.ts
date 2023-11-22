@@ -42,10 +42,6 @@ export default class NasaApiClient {
   async fetchRange(startDate: Date, endDate: Date): Promise<any> {
     const url: string = this.buildQuery(startDate, endDate)
     log.info('calling', { url })
-    try {
-      return await fetch(url, { method: this.props.method })
-    } catch (e) {
-      throw e
-    }
+    return await fetch(url, { method: this.props.method })
   }
 }

@@ -1,6 +1,6 @@
 'use client'
 import { Picture } from '@/types'
-import { fetchPictures } from '@/actions/ui-fetcher'
+import { fetchPictures } from '@/actions/fetchPictures'
 import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { toast } from 'react-toastify'
