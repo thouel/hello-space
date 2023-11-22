@@ -57,6 +57,7 @@ export default async function Home() {
     .then((res) => res.json())
     .then((body) => body)
   log.info(`message rcvd '${message}'`)
+  return <h1>{message}</h1>
   // const { isError, message, data } = await fetchPictures(1)
 
   // if (isError) {
