@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server'
 import NasaApiClient from '../lib/NasaApiClient'
 import { PicturesResult } from '@/types'
 import { log } from '@logtail/next'
@@ -35,7 +34,7 @@ export async function POST(request: Request) {
   }
   log.info('POST /api/feed result', { res })
 
-  return NextResponse.json(res, {
+  return Response.json(res, {
     status: res.message !== '' ? 400 : 200,
   })
 }
