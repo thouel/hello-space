@@ -37,7 +37,6 @@ jobs:
         continue-on-error: true
         run: |
           vercel env rm NASA_API_SECRET production --yes --token=${{ secrets.VERCEL_TOKEN }}
-          vercel env rm NODE_OPTIONS production --yes --token=${{ secrets.VERCEL_TOKEN }}
       - name: Push environment variable to Vercel
         run: |
           echo -n ${{ secrets.NASA_API_SECRET }} | vercel env add NASA_API_SECRET production --token=${{ secrets.VERCEL_TOKEN }}
