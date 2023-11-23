@@ -1,7 +1,7 @@
 'use client'
 
 import { strToDate } from '@/lib/ui-helper'
-import PictureOfTheDay from './PictureOfTheDay'
+import Thumbnail from './Thumbnail'
 import { Picture } from '@/types'
 
 export interface PicturesProps {
@@ -16,7 +16,7 @@ export default function Pictures({ pictures }: PicturesProps) {
           .sort(
             (a, b) => strToDate(b.date).getTime() - strToDate(a.date).getTime(),
           )
-          .map((p) => <PictureOfTheDay key={p.title} picture={p} />)
+          .map((p) => <Thumbnail key={p.title} picture={p} />)
       ) : (
         <div className='text-xl font-bold'>No pictures available !!</div>
       )}

@@ -19,3 +19,4 @@ export const Socials = [
 
 export const NAVBAR_HEIGHT = '64px'
 export const TOAST_DURATION = 3000
+export const FETCH_PICTURES_BY = 25

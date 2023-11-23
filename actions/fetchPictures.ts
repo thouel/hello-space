@@ -2,10 +2,11 @@
 import { PicturesResult } from '@/types'
 import { log } from '@logtail/next'
 import NasaApiClient from '@/lib/NasaApiClient'
+import { FETCH_PICTURES_BY } from '@/constants'
 
 export const fetchPictures = async (page: number) => {
   log.info(`fetchPictures with page = ${page}`)
-  const perPage = 5
+  const perPage = FETCH_PICTURES_BY
   const currentDate = new Date()
   const endDate = new Date()
   endDate.setDate(currentDate.getDate() - (perPage * (page - 1) + 1))
@@ -16,7 +17,7 @@ export const fetchPictures = async (page: number) => {
     start: startDate,
     end: endDate,
   })
-  log.info('fetchPictures', { res })
+  log.debug('fetchPictures', { res })
   return res
 }
 

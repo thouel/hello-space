@@ -22,3 +22,8 @@
 - Write proper README.md
 
 ## Bugs
+
+## Useful links
+
+- [https://logs.betterstack.com]
+- [https://vercel.com]

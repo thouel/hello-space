@@ -21,11 +21,23 @@ export default class NasaApiClient {
     }
   }
 
-  private buildQuery(startDate: Date, endDate: Date): string {
+  private buildQueryWithStartAndEndDates(
+    startDate: Date,
+    endDate: Date,
+  ): string {
     const searchParams: URLSearchParams = new URLSearchParams()
     searchParams.append('api_key', this.props.secret ?? '')
     searchParams.append('start_date', this.formatDate(startDate))
     searchParams.append('end_date', this.formatDate(endDate))
+    const url = new URL(this.props.url)
+    url.search = searchParams.toString()
+    return url.toString()
+  }
+
+  private buildQueryWithOneDate(date: string): string {
+    const searchParams: URLSearchParams = new URLSearchParams()
+    searchParams.append('api_key', this.props.secret ?? '')
+    searchParams.append('date', date)
     const url = new URL(this.props.url)
     url.search = searchParams.toString()
     return url.toString()
@@ -40,7 +52,13 @@ export default class NasaApiClient {
   }
 
   async fetchRange(startDate: Date, endDate: Date): Promise<any> {
-    const url: string = this.buildQuery(startDate, endDate)
+    const url: string = this.buildQueryWithStartAndEndDates(startDate, endDate)
+    log.info('calling', { url })
+    return await fetch(url, { method: this.props.method })
+  }
+
+  async fetchOne(date: string): Promise<any> {
+    const url: string = this.buildQueryWithOneDate(date)
     log.info('calling', { url })
     return await fetch(url, { method: this.props.method })
   }

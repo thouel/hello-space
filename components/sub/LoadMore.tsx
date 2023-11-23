@@ -39,7 +39,7 @@ const LoadMore = () => {
 
   useEffect(() => {
     if (inView && !isLoadingRef.current) {
-      loadMorePictures()
+      // loadMorePictures()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView])
@@ -47,11 +47,13 @@ const LoadMore = () => {
   return (
     <>
       <Pictures pictures={pictures} />
+      {/* <div className='flex items-center justify-center p-4' ref={ref}> */}
       <div
-        className='flex items-center justify-center col-span-1 p-4'
+        className='fixed bottom-0 left-0 w-full max-w-full border border-gray-400 bg-black/50 border-rounded'
         ref={ref}
       >
-        <Spinner />
+        Load more
+        {/* <Spinner /> */}
       </div>
     </>
   )

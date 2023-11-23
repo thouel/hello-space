@@ -14,3 +14,9 @@ export type PicturesResult = {
   data: Picture[]
   isError: boolean
 }
+
+export type PictureResult = {
+  message: string
+  data: Picture | null
+  isError: boolean
+}
