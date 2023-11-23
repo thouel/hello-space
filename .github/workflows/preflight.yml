@@ -4,7 +4,6 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
   NASA_API_SECRET: ${{ secrets.NASA_API_SECRET }}
-  APP_TOKEN: ${{ secrets.APP_TOKEN }}
 
   # to tell nextjs to automatically push this client side, we prefix the key with NEXT_PUBLIC
   # @see https://nextjs.org/docs/app/building-your-application/configuring/environment-variables
@@ -28,7 +27,6 @@ jobs:
         run: |
           touch .env.local
           echo NASA_API_SECRET=${{ secrets.NASA_API_SECRET }} >> .env.local
-          echo APP_TOKEN=${{ secrets.APP_TOKEN }} >> .env.local
           cat .env.local
       - name: Install dependencies
         run: npm ci

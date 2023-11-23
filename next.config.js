@@ -20,6 +20,9 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  experimental: {
+    typedRoutes: true,
+  },
 }
 
 module.exports = withLogtail(nextConfig)

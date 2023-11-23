@@ -12,9 +12,7 @@ export const fetchPictures = async (page: number) => {
   const startDate = new Date()
   startDate.setDate(currentDate.getDate() - perPage * page)
 
-  let isOk = true
   const res: PicturesResult = await callApi({
-    token: 'toto',
     start: startDate,
     end: endDate,
   })
@@ -23,13 +21,12 @@ export const fetchPictures = async (page: number) => {
 }
 
 interface CallApiProps {
-  token: string
   start: Date
   end: Date
 }
 
 const callApi = async (props: CallApiProps) => {
-  log.info(`Pictures /api/feed before getting props`)
+  log.info('callApi with', props)
   var res: PicturesResult = {
     message: '',
     data: [],
@@ -37,7 +34,6 @@ const callApi = async (props: CallApiProps) => {
   }
 
   const { start, end } = props
-  log.info(`Pictures with ${start}, ${end}`, { res })
 
   if (start === undefined || end === undefined) {
     throw new Error('No dates found')
@@ -60,7 +56,6 @@ const callApi = async (props: CallApiProps) => {
     .catch((e: any) => {
       throw new Error(e.message)
     })
-  log.info('Pictures result', { res })
 
   return res
 }

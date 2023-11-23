@@ -2,9 +2,16 @@
 
 ## Func
 
-- Handling errors:
-  - errors should be sent as json between server and client components
-  - errors should be thrown (as exception extending Error) while inside server or client components hierarchy
+- signup with mail / password / age / gender / interests
+- signin with mail / password
+- forgot password
+- signin with social (google, github, twitch)
+
+- once signedin :
+  - update profile picture + profile banner
+  - update password
+  - droit à l'oubli
+  - rgpd
 
 ## Tests
 

@@ -1,6 +1,7 @@
 # my-trendingvids-webapp
 
 ![NextJS](https://img.shields.io/badge/NextJS-cyan)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178c6)
 ![Next-Auth](https://img.shields.io/badge/NextAuth.js-yellow)
 ![TailwindCss](https://img.shields.io/badge/Tailwind--CSS-red)
 ![Responsive](https://img.shields.io/badge/Responsive-red)
@@ -37,7 +38,8 @@ App used to keep stepping in dev world. My main focuses were:
 
 Using:
 
-- [NextJs @14.0.2](https://nextjs.org/) to organize the app, using the [App Router](https://nextjs.org/docs/app)
+- [NextJs @14.0.3](https://nextjs.org/) to organize the app, using the [App Router](https://nextjs.org/docs/app)
+- [TypeScript @5.3](https://www.typescriptlang.org/)
 - [Next-Auth](https://next-auth.js.org/getting-started/introduction) to easily setup a signin/signup/signout mechanism with Github provider
 - [TailwindCSS](https://tailwindcss.com/docs/guides/nextjs) for pages styling
 - [Github](https://github.com/thouel/my-trendingvids-webapp/tree/main) to host app sources
@@ -48,7 +50,7 @@ Using:
 ## Install
 
 ```
-$ npm i react@latest react-dom@latest next@13.4.19
+$ npm i react@latest react-dom@latest next@14.0.3
 ```
 
 ## Test
