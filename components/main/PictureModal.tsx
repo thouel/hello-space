@@ -1,23 +1,50 @@
 'use client'
 import { Picture } from '@/types'
 import PictureCard from '../sub/PictureCard'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function PictureModal({ picture }: { picture: Picture }) {
+  const router = useRouter()
+
+  // push the router one step back
+  // and remove the close event listener
+  const onCloseDialog = useCallback(() => {
+    router.back()
+    const dialog = document.getElementById('mmodal')
+    if (dialog instanceof HTMLDialogElement) {
+      dialog.removeEventListener('close', onCloseDialog)
+    }
+  }, [router])
+
+  // Open the modal when component is mounted
+  // and bind the 'close' event
   useEffect(() => {
-    document.getElementById('mmodal').showModal()
-  }, [])
+    // Get the modal element
+    const dialog = document.getElementById('mmodal')
+    if (!(dialog instanceof HTMLDialogElement)) {
+      throw new Error('Dialog not found')
+    }
+    dialog.showModal()
+
+    // Listen for the close event
+    dialog.addEventListener('close', onCloseDialog)
+  }, [onCloseDialog])
+
   return (
     <>
-      <div className='m-4'>
-        <dialog id='mmodal' className='modal'>
-          <div className='max-w-full modal-box'>
+      <div className='m-4 '>
+        <dialog id='mmodal' className='modal bg-black/50'>
+          <div className='max-w-full modal-box bg-base-200'>
+            <form method='dialog'>
+              <button
+                className='absolute btn btn-sm btn-circle btn-ghost right-2 top-2'
+                style={{ zIndex: 10 }}
+              >
+                ✕
+              </button>
+            </form>
             <PictureCard picture={picture} />
-            <div className='modal-action'>
-              <form method='dialog'>
-                <button className='btn'>Close</button>
-              </form>
-            </div>
           </div>
         </dialog>
       </div>

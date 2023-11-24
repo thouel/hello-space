@@ -24,8 +24,10 @@ const PictureCard = ({ picture }: { picture: Picture }) => {
           <p>{picture.title}</p>
         </h2>
         <div className='flex flex-row justify-between text-xs sm:text-sm md:text-base'>
-          <span className='w-3/5'>&copy; {picture.copyright}</span>
-          <span className='w-1/5 text-right'>{picture.date}</span>
+          <div className='w-3/5 h-full badge badge-neutral'>
+            &copy; {picture.copyright}
+          </div>
+          <div className='h-full badge badge-neutral'>{picture.date}</div>
         </div>
 
         <p className='text-sm text-justify'>{picture.explanation}</p>
