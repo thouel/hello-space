@@ -1,11 +1,12 @@
 'use client'
 import { strToDate } from '@/lib/ui-helper'
 import { Picture } from '@/types'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import Thumbnail from '../sub/Thumbnail'
 import { fetchPictures } from '@/actions/fetchPictures'
 import { Spinner } from '../sub/Spinner'
+import { toast } from 'react-toastify'
 
 export interface InfinitePicturesProps {
   initialPictures: Picture[]
@@ -14,8 +15,14 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
   const [pictures, setPictures] = useState<Picture[]>(props.initialPictures)
   const [page, setPage] = useState(1)
   const [ref, inView] = useInView()
+  const isLoading = useRef(false)
 
   const loadMorePictures = async () => {
+    isLoading.current = true
+    const id = toast.info('Loading new pictures', {
+      hideProgressBar: true,
+      delay: 0,
+    })
     const next = page + 1
     const newPictures = await fetchPictures(next)
     if (!newPictures.isError) {
@@ -24,11 +31,19 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
         ...newPictures.data,
       ])
       setPage(next)
+      toast.success('Loaded new pictures', {
+        hideProgressBar: true,
+        delay: 2000,
+      })
+    } else {
+      toast.error('Error while loading new pictures')
     }
+    toast.dismiss(id)
+    isLoading.current = false
   }
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !isLoading.current) {
       loadMorePictures()
     }
   })

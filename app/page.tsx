@@ -1,5 +1,6 @@
 import { fetchPictures } from '@/actions/fetchPictures'
 import InfinitePictures from '@/components/main/InfinitePictures'
+import BackToTopButton from '@/components/sub/BackToTopButton'
 
 export default async function Home() {
   const { isError, message, data } = await fetchPictures(1)
@@ -14,6 +15,7 @@ export default async function Home() {
         Hello Space & Astronomy
       </h1>
       <InfinitePictures initialPictures={data} />
+      <BackToTopButton />
     </main>
   )
 }
