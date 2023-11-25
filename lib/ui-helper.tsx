@@ -39,3 +39,8 @@ export function strToDate(str: string): Date {
 
   return dateObject
 }
+
+export function displayDate(str: string): string {
+  const [year, month, day] = str.split('-')
+  return `${month}/${day}/${year}`
+}

@@ -5,6 +5,7 @@ import Providers from '@/providers/Providers'
 
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
+import Navbar from '@/components/main/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,13 +22,14 @@ export default function RootLayout({
   modal: React.ReactNode
 }) {
   return (
-    <html lang='en' data-theme='lofi'>
+    <html lang='en'>
       <body
-        className={`${inter.className} overflow-y-scroll overflow-x-hidden`}
+        className={`${inter.className} overflow-y-scroll overflow-x-hidden bg-white dark:bg-black dark:text-white/90`}
       >
         <Providers>
-          <div>{children}</div>
+          <Navbar />
           {modal}
+          <div>{children}</div>
         </Providers>
       </body>
     </html>
