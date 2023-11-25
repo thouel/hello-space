@@ -35,7 +35,7 @@ export default function PictureModal({ picture }: { picture: Picture }) {
     <>
       <div className='m-4 '>
         <dialog id='mmodal' className='modal bg-black/50 dark:bg-white/50'>
-          <div className='max-w-full modal-box bg-base-200 dark:bg-black dark:text-white/90'>
+          <div className='max-w-full modal-box bg-base-200 dark:bg-black/95 dark:text-white/90'>
             <form method='dialog'>
               <button
                 className='absolute btn btn-sm btn-circle btn-ghost right-2 top-2'

@@ -6,7 +6,7 @@ import React from 'react'
 
 const PictureCard = ({ picture }: { picture: Picture }) => {
   return (
-    <div className='shadow-xl card lg:card-side bg-base-200 dark:bg-black dark:text-white/90'>
+    <div className='shadow-xl card lg:card-side dark:bg-black/95 dark:text-white/90'>
       <figure>
         {picture.media_type === 'image' ? (
           <Link href={`/p/${picture.date}`}>
