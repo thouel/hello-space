@@ -19,7 +19,7 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
 
   const loadMorePictures = async () => {
     isLoading.current = true
-    const id = toast.info('Loading new pictures', {
+    const id = toast.info(`Loading page ${page + 1}`, {
       hideProgressBar: true,
       delay: 0,
     })
@@ -31,7 +31,7 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
         ...newPictures.data,
       ])
       setPage(next)
-      toast.success('Loaded new pictures', {
+      toast.success(`Loaded page ${page + 1}`, {
         hideProgressBar: true,
         delay: 2000,
       })

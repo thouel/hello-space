@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "prisma": "prisma generate",
+    "postinstall": "prisma generate",
     "cy:open": "cypress open",
     "cy:run": "cypress run"
   },
