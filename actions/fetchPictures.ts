@@ -17,7 +17,7 @@ export const fetchPictures = async (page: number) => {
     start: startDate,
     end: endDate,
   })
-  log.debug('fetchPictures', { res })
+  // log.debug('fetchPictures', { res })
   return res
 }
 
