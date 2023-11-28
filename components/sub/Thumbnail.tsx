@@ -12,8 +12,8 @@ export default function Thumbnail({ picture }: { picture: Picture }) {
             <Link href={`/p/${picture.date}`}>
               <Image
                 src={picture.url?.toString()}
-                width={400}
-                height={400}
+                width={200}
+                height={200}
                 alt={picture.title}
                 className='transition-transform duration-500 shadow-xl hover:scale-125'
               />

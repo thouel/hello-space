@@ -1,29 +1,46 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import ThemeButton from '../sub/ThemeButton'
 import { RocketLaunchIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import { auth } from '@/auth'
-import PrintSession from '../sub/PrintSession'
 import { Session } from 'next-auth'
 
-const Navbar = async () => {
-  const session = await auth()
+const Navbar = ({ session }: { session: Session | null }) => {
+  const [isVisible, setIsVisible] = useState(true)
+
+  const toggleVisibility = () => {
+    setIsVisible(window.scrollY < 50)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', toggleVisibility)
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility)
+    }
+  }, [])
+
   return (
     <>
-      <div className='flex flex-row justify-between py-5 mx-5'>
+      <div
+        className={`${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        } flex flex-row justify-between transition-opacity`}
+      >
         <Link href={'/'}>
-          <p className='p-2'>
-            <RocketLaunchIcon className='inline-block w-10 h-10' />
-            <span className='ml-3 text-2xl font-semibold align-middle'>
+          <p className=''>
+            <RocketLaunchIcon className='inline-block w-6 h-6' />
+            <span className='ml-1 text-sm font-semibold align-middle'>
               Hello Space
             </span>
           </p>
         </Link>
-        <PrintSession />
-
-        <div className='flex flex-row justify-between'>
-          <ThemeButton />
-          <AuthPart session={session} />
+        <div className='inline'>
+          <span className=''>
+            <ThemeButton />
+          </span>
+          <span className='ml-3 align-top'>
+            <AuthPart session={session} />
+          </span>
         </div>
       </div>
     </>
@@ -33,17 +50,15 @@ const Navbar = async () => {
 const AuthPart = ({ session }: { session: Session | null }) => {
   return (
     <>
-      <p className='p-2 mt-1 ml-3 text-xl font-semibold'>
+      <span className='text-sm font-semibold '>
         {!session?.user ? (
           <>
-            <Link href={'/api/auth/signin'}>Sign in</Link>
-            &nbsp;|&nbsp;
-            <Link href={'/auth/signup'}>Sign up</Link>
+            <Link href={'/auth/login'}>Log in</Link>
           </>
         ) : (
           <Link href={'/api/auth/signout'}>Sign out</Link>
         )}
-      </p>
+      </span>
     </>
   )
 }

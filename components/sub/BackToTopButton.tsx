@@ -23,7 +23,7 @@ const BackToTopButton = () => {
     }
   }, [])
   return (
-    <div className='fixed bottom-2 right-2'>
+    <div className='fixed bottom-14 right-5'>
       <button
         type='button'
         onClick={scrollToTop}

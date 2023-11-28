@@ -22,7 +22,7 @@ const ThemeButton = () => {
 
       {/* sun icon */}
       <svg
-        className='w-8 h-8 fill-current swap-on'
+        className='w-6 h-6 fill-current swap-on'
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 24 24'
       >
@@ -31,7 +31,7 @@ const ThemeButton = () => {
 
       {/* moon icon */}
       <svg
-        className='w-8 h-8 fill-current swap-off'
+        className='w-6 h-6 fill-current swap-off'
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 24 24'
       >

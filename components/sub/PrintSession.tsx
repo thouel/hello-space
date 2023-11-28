@@ -15,7 +15,7 @@ const PrintSession = () => {
 
   return (
     <>
-      <button className='ml-4' onClick={() => printSession()}>
+      <button className='ml-2 text-xs' onClick={() => printSession()}>
         Print session
       </button>
     </>

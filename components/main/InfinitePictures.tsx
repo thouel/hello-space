@@ -50,7 +50,7 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
 
   return (
     <>
-      <div className='sm:columns-3 md:columns-4 lg:columns-5 columns-2 gap-x-1'>
+      <div className='columns-2 gap-x-1'>
         {pictures ? (
           pictures
             .sort(
