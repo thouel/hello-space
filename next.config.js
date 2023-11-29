@@ -10,6 +10,12 @@ const nextConfig = {
         pathname: '/apod/image/**',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'daisyui.com',
+        pathname: 'images/stock/*',
+        port: '',
+      },
     ],
   },
   compiler: {

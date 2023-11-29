@@ -34,11 +34,11 @@ export default function PictureModal({ picture }: { picture: Picture }) {
   return (
     <>
       <div className=''>
-        <dialog id='mmodal' className='modal bg-black/50 dark:bg-white/50'>
-          <div className='max-w-full modal-box bg-base-200 dark:bg-black/95 dark:text-white/90'>
+        <dialog id='mmodal' className='modal bg-black/50 '>
+          <div className='max-w-full p-1 modal-box bg-base-200 dark:bg-black/95 dark:text-white/90'>
             <form method='dialog'>
               <button
-                className='absolute btn btn-sm btn-circle btn-ghost right-2 top-2'
+                className='absolute btn btn-sm btn-circle btn-ghost right-1 top-1'
                 style={{ zIndex: 10 }}
               >
                 ✕

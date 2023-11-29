@@ -2,14 +2,12 @@
 
 ## Func
 
-- signup with mail / password / age / gender / interests
-- signin with mail / password
-- forgot password
-- signin with social (google, github, twitch)
+- signin with social (google, twitch)
+
+- filter pictures with keyword (and search & highlight the keyword in title, copyright, explanation)
 
 - once signedin :
   - update profile picture + profile banner
-  - update password
   - droit à l'oubli
   - rgpd
 

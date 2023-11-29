@@ -52,9 +52,7 @@ const AuthPart = ({ session }: { session: Session | null }) => {
     <>
       <span className='text-sm font-semibold '>
         {!session?.user ? (
-          <>
-            <Link href={'/auth/login'}>Log in</Link>
-          </>
+          <Link href={'/auth/login'}>Log in</Link>
         ) : (
           <Link href={'/api/auth/signout'}>Sign out</Link>
         )}

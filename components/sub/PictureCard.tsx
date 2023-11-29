@@ -6,22 +6,20 @@ import React from 'react'
 
 const PictureCard = ({ picture }: { picture: Picture }) => {
   return (
-    <div className='shadow-xl card lg:card-side dark:bg-black/95 dark:text-white/90'>
+    <div className='shadow-xl card lg:card-side'>
       <figure>
         {picture.media_type === 'image' ? (
-          <Link href={`/p/${picture.date}`}>
-            <Image
-              src={picture.hdurl?.toString() ?? picture.url.toString()}
-              width={1000}
-              height={1000}
-              alt={picture.title}
-              className=''
-            />
-          </Link>
+          <Image
+            src={picture.hdurl?.toString() ?? picture.url.toString()}
+            width={1000}
+            height={1000}
+            alt={picture.title}
+            className=''
+          />
         ) : null}
       </figure>
-      <div className='max-w-full px-8 py-0 lg:max-w-lg card-body'>
-        <h2 className='min-h-0 mb-2 text-lg sm:text-xl md:text-2xl card-title'>
+      <div className='max-w-full px-2 py-1 card-body'>
+        <h2 className='mb-2 text-lg card-title'>
           <p>{picture.title}</p>
         </h2>
         <div className='mb-2 text-sm text-justify'>{picture.explanation}</div>

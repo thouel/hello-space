@@ -6,7 +6,9 @@ import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 import Navbar from '@/components/main/Navbar'
 import Footer from '@/components/main/Footer'
-import { auth } from '@/auth'
+import { getServerSession } from 'next-auth'
+import options from '@/app/api/auth/[...nextauth]/options'
+import Navbar2 from '@/components/main/Navbar2'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +24,8 @@ export default async function RootLayout({
   children: React.ReactNode
   modal: React.ReactNode
 }) {
-  const session = await auth()
+  const session = await getServerSession(options)
+
   return (
     <html lang='en'>
       <body
@@ -30,10 +33,13 @@ export default async function RootLayout({
       >
         <Providers>
           <nav className='fixed top-0 z-50 w-full px-4 py-2'>
-            <Navbar session={session} />
+            {/* <Navbar session={session} /> */}
+            <Navbar2 />
           </nav>
           {modal}
-          <main className='w-full px-2 pt-16'>{children}</main>
+          <main className='w-full h-full min-h-screen px-2 pt-16'>
+            {children}
+          </main>
           <footer className='fixed bottom-0 z-50 w-full text-gray-900 bg-gray-100 dark:text-gray-100 dark:bg-gray-900'>
             <Footer />
           </footer>
