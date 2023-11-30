@@ -1,14 +1,12 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Providers from '@/providers/Providers'
-
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 import Navbar from '@/components/main/Navbar'
 import Footer from '@/components/main/Footer'
 import { getServerSession } from 'next-auth'
 import options from '@/app/api/auth/[...nextauth]/options'
-import Navbar2 from '@/components/main/Navbar2'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,9 +30,8 @@ export default async function RootLayout({
         className={`${inter.className} overflow-y-scroll overflow-x-hidden bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100`}
       >
         <Providers>
-          <nav className='fixed top-0 z-50 w-full px-4 py-2'>
-            {/* <Navbar session={session} /> */}
-            <Navbar2 />
+          <nav className='fixed top-0 z-50 w-full p-1'>
+            <Navbar session={session} />
           </nav>
           {modal}
           <main className='w-full h-full min-h-screen px-2 pt-16'>

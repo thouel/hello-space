@@ -4,6 +4,12 @@
 
 - signin with social (google, twitch)
 
+  - handle error
+
+    > OAuthAccountNotLinked
+
+  - write tests for social logins to check they behave appropriatly
+
 - filter pictures with keyword (and search & highlight the keyword in title, copyright, explanation)
 
 - once signedin :

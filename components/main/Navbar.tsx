@@ -4,6 +4,8 @@ import ThemeButton from '../sub/ThemeButton'
 import { RocketLaunchIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { Session } from 'next-auth'
+import { styles } from '@/constants/styles'
+import NavAuthBar from '../sub/NavAuthBar'
 
 const Navbar = ({ session }: { session: Session | null }) => {
   const [isVisible, setIsVisible] = useState(true)
@@ -24,39 +26,19 @@ const Navbar = ({ session }: { session: Session | null }) => {
       <div
         className={`${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } flex flex-row justify-between transition-opacity`}
+        } flex flex-row justify-between transition-opacity min-h-[40px] h-[40px] text-sm font-semibold`}
       >
-        <Link href={'/'}>
-          <p className=''>
+        <Link href={'/'} className='mt-1'>
+          <p className={styles.clickEffect}>
             <RocketLaunchIcon className='inline-block w-6 h-6' />
-            <span className='ml-1 text-sm font-semibold align-middle'>
-              Hello Space
-            </span>
+            <span className='ml-1'>Hello Space</span>
           </p>
         </Link>
-        <div className='inline'>
-          <span className=''>
-            <ThemeButton />
-          </span>
-          <span className='ml-3 align-top'>
-            <AuthPart session={session} />
-          </span>
+        <div className='flex flex-row gap-2'>
+          {session?.user ? null : <ThemeButton />}
+          <NavAuthBar session={session} />
         </div>
       </div>
-    </>
-  )
-}
-
-const AuthPart = ({ session }: { session: Session | null }) => {
-  return (
-    <>
-      <span className='text-sm font-semibold '>
-        {!session?.user ? (
-          <Link href={'/auth/login'}>Log in</Link>
-        ) : (
-          <Link href={'/api/auth/signout'}>Sign out</Link>
-        )}
-      </span>
     </>
   )
 }

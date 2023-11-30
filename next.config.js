@@ -16,6 +16,12 @@ const nextConfig = {
         pathname: 'images/stock/*',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        pathname: '/u/*',
+        port: '',
+      },
     ],
   },
   compiler: {

@@ -1,5 +1,3 @@
-import NextAuth from 'next-auth'
-
 // import Apple from "next-auth/providers/apple"
 // import Atlassian from "next-auth/providers/atlassian"
 // import Auth0 from "next-auth/providers/auth0"
@@ -12,7 +10,7 @@ import NextAuth from 'next-auth'
 // import Bungie from "next-auth/providers/bungie"
 // import Cognito from "next-auth/providers/cognito"
 // import Coinbase from "next-auth/providers/coinbase"
-// import Discord from "next-auth/providers/discord"
+import Discord from 'next-auth/providers/discord'
 // import Dropbox from "next-auth/providers/dropbox"
 // import DuendeIDS6 from "next-auth/providers/duende-identity-server6"
 // import Eveonline from "next-auth/providers/eveonline"
@@ -23,6 +21,7 @@ import NextAuth from 'next-auth'
 // import Freshbooks from "next-auth/providers/freshbooks"
 // import Fusionauth from "next-auth/providers/fusionauth"
 // import Gitlab from "next-auth/providers/gitlab"
+import Github from 'next-auth/providers/github'
 // import Google from "next-auth/providers/google"
 // import Hubspot from "next-auth/providers/hubspot"
 // import Instagram from "next-auth/providers/instagram"
@@ -43,7 +42,7 @@ import NextAuth from 'next-auth'
 // import Patreon from "next-auth/providers/patreon"
 // import Pinterest from "next-auth/providers/pinterest"
 // import Pipedrive from "next-auth/providers/pipedrive"
-// import Reddit from "next-auth/providers/reddit"
+import Reddit from 'next-auth/providers/reddit'
 // import Salesforce from "next-auth/providers/salesforce"
 // import Slack from "next-auth/providers/slack"
 // import Spotify from "next-auth/providers/spotify"
@@ -64,19 +63,26 @@ import NextAuth from 'next-auth'
 
 import type { NextAuthOptions } from 'next-auth'
 import { randomBytes, randomUUID } from 'crypto'
-import Github from 'next-auth/providers/github'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import prisma from '@/lib/db/db'
 
-export const options = {
+const options = {
   adapter: PrismaAdapter(prisma),
   theme: {
     logo: 'https://next-auth.js.org/img/logo/logo-sm.png',
   },
   providers: [
+    Discord({
+      clientId: process.env.AUTH_DISCORD_ID ?? '',
+      clientSecret: process.env.AUTH_DISCORD_SECRET ?? '',
+    }),
     Github({
       clientId: process.env.AUTH_GITHUB_ID ?? '',
       clientSecret: process.env.AUTH_GITHUB_SECRET ?? '',
+    }),
+    Reddit({
+      clientId: process.env.AUTH_REDDIT_ID ?? '',
+      clientSecret: process.env.AUTH_REDDIT_SECRET ?? '',
     }),
   ],
   session: {

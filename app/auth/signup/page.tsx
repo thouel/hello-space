@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth'
 import options from '@/app/api/auth/[...nextauth]/options'
-import SignInAndUpProviders from '@/components/sub/SignInAndUpProviders'
+import SignInProviders from '@/components/sub/SignInProviders'
 import { log } from '@logtail/next'
 import { redirect } from 'next/navigation'
 import { getCsrfToken } from 'next-auth/react'
@@ -89,7 +89,7 @@ export default async function SignupPage() {
           </form>
         </div>
         <div className='w-full'>
-          <SignInAndUpProviders providers={providers} type={'signup'} />
+          <SignInProviders providers={providers} />
         </div>
       </div>
     </>

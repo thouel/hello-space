@@ -1,6 +1,7 @@
 'use client'
 import React, { ChangeEvent } from 'react'
 import { useTheme } from 'next-themes'
+import { styles } from '@/constants/styles'
 
 const ThemeButton = () => {
   const { theme, setTheme } = useTheme()
@@ -10,7 +11,7 @@ const ThemeButton = () => {
   }
 
   return (
-    <label className='swap swap-rotate'>
+    <label className={`${styles.clickEffect} swap swap-rotate`}>
       {/* this hidden checkbox controls the state */}
       <input
         type='checkbox'

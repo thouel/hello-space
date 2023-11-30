@@ -1,6 +1,6 @@
 import { Picture } from '@/types'
 
-import prisma from '@/lib/db'
+import prisma from './db'
 import { log } from '@logtail/next'
 /* To allow a BigInt to be JSON.stringify'd */
 require('@/lib/bigint-tojson')
