@@ -4,7 +4,15 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
   NASA_API_SECRET: ${{ secrets.NASA_API_SECRET }}
-
+  MONGODB_URI: ${{secrets.MONGODB_URI}}
+  NEXTAUTH_URL: ${{ vars.NEXTAUTH_URL }}
+  NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
+  AUTH_GITHUB_ID: ${{secrets.AUTH_GITHUB_ID}}
+  AUTH_GITHUB_SECRET: ${{secrets.AUTH_GITHUB_SECRET}}
+  AUTH_REDDIT_ID: ${{secrets.AUTH_REDDIT_ID}}
+  AUTH_REDDIT_SECRET: ${{secrets.AUTH_REDDIT_SECRET}}
+  AUTH_DISCORD_ID: ${{secrets.AUTH_DISCORD_ID}}
+  AUTH_DISCORD_SECRET: ${{secrets.AUTH_DISCORD_SECRET}}
   # to tell nextjs to automatically push this client side, we prefix the key with NEXT_PUBLIC
   # @see https://nextjs.org/docs/app/building-your-application/configuring/environment-variables
   # NEXT_PUBLIC_LOCAL_URL=${LOCAL_URL}
@@ -27,6 +35,16 @@ jobs:
         run: |
           touch .env.local
           echo NASA_API_SECRET=${{ secrets.NASA_API_SECRET }} >> .env.local
+          echo LOCAL_URL=${{env.LOCAL_URL}} >> .env.local
+          echo MONGODB_URI=${{env.MONGODB_URI}} >> .env.local
+          echo NEXTAUTH_URL=${{env.NEXTAUTH_URL}} >> .env.local
+          echo NEXTAUTH_SECRET=${{env.NEXTAUTH_SECRET}} >> .env.local
+          echo AUTH_GITHUB_ID=${{env.AUTH_GITHUB_ID}} >> .env.local
+          echo AUTH_GITHUB_SECRET=${{env.AUTH_GITHUB_SECRET}} >> .env.local
+          echo AUTH_REDDIT_ID=${{env.AUTH_REDDIT_ID}} >> .env.local
+          echo AUTH_REDDIT_SECRET=${{env.AUTH_REDDIT_SECRET}} >> .env.local
+          echo AUTH_DISCORD_ID=${{env.AUTH_DISCORD_ID}} >> .env.local
+          echo AUTH_DISCORD_SECRET=${{env.AUTH_DISCORD_SECRET}} >> .env.local
           cat .env.local
       - name: Install dependencies
         run: npm ci

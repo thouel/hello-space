@@ -1,5 +1,9 @@
 # Hello Space TODO List
 
+## CI/CD
+
+- fix deployment
+
 ## Func
 
 - signin with social (google, twitch)
