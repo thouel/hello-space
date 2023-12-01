@@ -11,7 +11,7 @@ export default async function Home() {
 
   return (
     <>
-      <h1 className='mb-4 text-xl font-bold text-center'>
+      <h1 data-test='title' className='mb-4 text-xl font-bold text-center'>
         Hello Space & Astronomy
       </h1>
       <InfinitePictures initialPictures={data} />

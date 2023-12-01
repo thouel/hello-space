@@ -16,20 +16,32 @@ const SignInProviders = ({ providers }: { providers: any }) => {
   return (
     <>
       {providers.github ? (
-        <button className={styles.btn} onClick={() => signIn('github')}>
+        <button
+          data-test='github'
+          className={styles.btn}
+          onClick={() => signIn('github')}
+        >
           <RxGithubLogo className={styles.logo} />
           Sign in with GitHub
         </button>
       ) : null}
       {providers.discord ? (
-        <button className={styles.btn} onClick={() => signIn('discord')}>
+        <button
+          data-test='discord'
+          className={styles.btn}
+          onClick={() => signIn('discord')}
+        >
           <RxDiscordLogo className={styles.logo} />
           Sign in with Discord
         </button>
       ) : null}
 
       {providers.reddit ? (
-        <button className={styles.btn} onClick={() => signIn('reddit')}>
+        <button
+          data-test='reddit'
+          className={styles.btn}
+          onClick={() => signIn('reddit')}
+        >
           <PiRedditLogo className={styles.logo} />
           Sign in with Reddit
         </button>
