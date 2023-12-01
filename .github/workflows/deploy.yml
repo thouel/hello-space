@@ -46,15 +46,15 @@ jobs:
         continue-on-error: true
         run: |
           vercel env rm NASA_API_SECRET production --yes --token=${{ secrets.VERCEL_TOKEN }}
-          vercel env rm NEXTAUTH_URL production ---yes --token=${{secrets.VERCEL_TOKEN}}
-          vercel env rm MONGODB_URI production ---yes --token=${{secrets.VERCEL_TOKEN}}
-          vercel env rm NEXTAUTH_SECRET production ---yes --token=${{secrets.VERCEL_TOKEN}}
-          vercel env rm AUTH_GITHUB_ID production ---yes --token=${{secrets.VERCEL_TOKEN}}
-          vercel env rm AUTH_GITHUB_SECRET production ---yes --token=${{secrets.VERCEL_TOKEN}}
-          vercel env rm AUTH_REDDIT_ID production ---yes --token=${{secrets.VERCEL_TOKEN}}
-          vercel env rm AUTH_REDDIT_SECRET production ---yes --token=${{secrets.VERCEL_TOKEN}}
-          vercel env rm AUTH_DISCORD_ID production ---yes --token=${{secrets.VERCEL_TOKEN}}
-          vercel env rm AUTH_DISCORD_SECRET production ---yes --token=${{secrets.VERCEL_TOKEN}}
+          vercel env rm NEXTAUTH_URL production --yes --token=${{secrets.VERCEL_TOKEN}}
+          vercel env rm MONGODB_URI production --yes --token=${{secrets.VERCEL_TOKEN}}
+          vercel env rm NEXTAUTH_SECRET production --yes --token=${{secrets.VERCEL_TOKEN}}
+          vercel env rm AUTH_GITHUB_ID production --yes --token=${{secrets.VERCEL_TOKEN}}
+          vercel env rm AUTH_GITHUB_SECRET production --yes --token=${{secrets.VERCEL_TOKEN}}
+          vercel env rm AUTH_REDDIT_ID production --yes --token=${{secrets.VERCEL_TOKEN}}
+          vercel env rm AUTH_REDDIT_SECRET production --yes --token=${{secrets.VERCEL_TOKEN}}
+          vercel env rm AUTH_DISCORD_ID production --yes --token=${{secrets.VERCEL_TOKEN}}
+          vercel env rm AUTH_DISCORD_SECRET production --yes --token=${{secrets.VERCEL_TOKEN}}
 
       - name: Push environment variable to Vercel
         run: |
