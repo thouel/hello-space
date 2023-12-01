@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth'
 import options from '@/app/api/auth/[...nextauth]/options'
 import SignInProviders from '@/components/sub/SignInProviders'
-import { log } from '@logtail/next'
 import { redirect } from 'next/navigation'
 import { getCsrfToken } from 'next-auth/react'
+import { getBaseUrl } from '@/lib/ui-helper'
 
 export default async function SignupPage() {
   const session = await getServerSession(options)
@@ -13,7 +13,7 @@ export default async function SignupPage() {
   }
 
   const csrfToken = await getCsrfToken()
-  const providers = await fetch('http://localhost:3000/api/auth/providers')
+  const providers = await fetch(`${getBaseUrl()}/api/auth/providers`)
     .then((res) => res.json())
     .then((body) => body)
 

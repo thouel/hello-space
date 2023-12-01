@@ -2,15 +2,9 @@
 
 ## CI/CD
 
-- fix deployment
-
 ## Func
 
 - signin with social (google, twitch)
-
-  - handle error
-
-    > OAuthAccountNotLinked
 
   - write tests for social logins to check they behave appropriatly
 
@@ -30,6 +24,8 @@
 - Write proper README.md
 
 ## Bugs
+
+- in modal, make the cross visible in light and dark theme
 
 - When opening a modal, we scroll to the bottom of the page and start loading immediately (because the {modal} is inserted after {children} in root layout). Perhaps we can use a lib to block body scroll such as [body-scroll-lock](https://www.npmjs.com/package/body-scroll-lock) => mitigated by putting {modal} on top of {children} in root layout
 

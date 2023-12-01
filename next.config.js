@@ -22,6 +22,12 @@ const nextConfig = {
         pathname: '/u/*',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.discordapp.com',
+        pathname: '/embed/avatars/*',
+        port: '',
+      },
     ],
   },
   compiler: {
