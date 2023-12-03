@@ -4,14 +4,16 @@
 
 ## Func
 
-- signin with social (google, twitch)
-
-  - write tests for social logins to check they behave appropriatly
-
 - filter pictures with keyword (and search & highlight the keyword in title, copyright, explanation)
 
 - once signedin :
+
   - update profile picture + profile banner
+
+    - add loading indicator while processing uploads / deletes
+    - save custom avatar to profile
+    - save custom banner to profile
+
   - droit à l'oubli
   - rgpd
 

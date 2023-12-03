@@ -1,33 +1,46 @@
 import options from '@/app/api/auth/[...nextauth]/options'
+import Avatar from '@/components/sub/Avatar'
+import Banner from '@/components/sub/Banner'
+import prisma from '@/lib/db/db'
+import { log } from '@logtail/next'
 import { getServerSession } from 'next-auth'
-import Image from 'next/image'
 import { redirect } from 'next/navigation'
 
 export default async function ProfilePage() {
   const session = await getServerSession(options)
-  const user = session?.user
+  const sessionUser = session?.user
 
   // No need to reject user if session is null.
   // middleware is taking care of it earlier
 
-  if (!user) {
+  if (!sessionUser) {
     redirect('/')
   }
+
+  const user = await prisma.user.findFirst({
+    where: {
+      OR: [
+        { email: sessionUser.email ?? '' },
+        { name: sessionUser.name ?? '' },
+      ],
+    },
+    include: {
+      accounts: {},
+    },
+  })
+  log.info('found user', { user })
 
   return (
     <>
       <div className='flex flex-col gap-4'>
-        {user.image ? (
-          <Image
-            src={user.image}
-            width={96}
-            height={96}
-            alt='Profile picture'
-            className='border-8 border-white'
-          />
-        ) : null}
-        <h1>Welcome {user.name}</h1>
-        <span>{user.email}</span>
+        <Banner banner={user?.bannerPicture} />
+        <div className='flex flex-row gap-4'>
+          <Avatar image={sessionUser.image} />
+          <div>
+            <h1>Welcome {sessionUser.name}</h1>
+            <p>{sessionUser.email}</p>
+          </div>
+        </div>
       </div>
     </>
   )

@@ -26,7 +26,7 @@ const Navbar = ({ session }: { session: Session | null }) => {
       <div
         className={`${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } flex flex-row justify-between transition-opacity min-h-[40px] h-[40px] text-sm font-semibold`}
+        } flex flex-row justify-between transition-opacity min-h-[40px] h-[40px] text-sm font-semibold bg-white dark:bg-[#6800FF]`}
       >
         <Link href={'/'} className='mt-1'>
           <p className={styles.clickEffect}>

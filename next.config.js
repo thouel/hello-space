@@ -28,6 +28,12 @@ const nextConfig = {
         pathname: '/embed/avatars/*',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'rp0iqdxcvowxeg4o.public.blob.vercel-storage.com',
+        pathname: '/**',
+        port: '',
+      },
     ],
   },
   compiler: {
