@@ -4,7 +4,6 @@ import SignInProviders from '@/components/sub/SignInProviders'
 import { redirect } from 'next/navigation'
 import { log } from '@logtail/next'
 import { getBaseUrl } from '@/lib/ui-helper'
-import Image from 'next/image'
 import SignInError from '@/components/sub/SignInError'
 
 export default async function LoginPage() {

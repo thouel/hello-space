@@ -1,11 +1,10 @@
 'use client'
 import { useTheme } from 'next-themes'
-import React, { ChangeEvent } from 'react'
 
 const ThemeMenuItem = () => {
   const { theme, setTheme } = useTheme()
 
-  const handleThemeChange = (e: ChangeEvent<HTMLInputElement>): void => {
+  const handleThemeChange = (e: any): void => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
   }
 
@@ -21,7 +20,9 @@ const ThemeMenuItem = () => {
           id='theme'
         />
       </div>
-      <label htmlFor='theme'>Switch theme</label>
+      <label htmlFor='theme' onClick={handleThemeChange}>
+        Switch theme
+      </label>
     </>
   )
 }

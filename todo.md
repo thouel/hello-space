@@ -2,6 +2,8 @@
 
 ## CI/CD
 
+- on Vercel, why the /api/auth/providers is not accessible (401 / fetch failed)
+
 ## Func
 
 - filter pictures with keyword (and search & highlight the keyword in title, copyright, explanation)
@@ -10,12 +12,14 @@
 
   - update profile picture + profile banner
 
-    - add loading indicator while processing uploads / deletes
-    - save custom avatar to profile
-    - save custom banner to profile
+    - allow to remove avatar
+    - add loading indicator while processing uploads / deletes on banner & avatar
+    - handle the refresh of banner or avatar without reloading entirely the page (react-query?)
 
   - droit à l'oubli
   - rgpd
+
+- add a shop to buy the pictures we liked on t-shirts, sweats, mugs or plates
 
 ## Tests
 

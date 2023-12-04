@@ -17,13 +17,8 @@ export default async function ProfilePage() {
     redirect('/')
   }
 
-  const user = await prisma.user.findFirst({
-    where: {
-      OR: [
-        { email: sessionUser.email ?? '' },
-        { name: sessionUser.name ?? '' },
-      ],
-    },
+  const user = await prisma.user.findUniqueOrThrow({
+    where: { name: sessionUser.name ?? '' },
     include: {
       accounts: {},
     },
