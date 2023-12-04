@@ -7,7 +7,7 @@ export interface TeardownProps {
 
 async function teardown() {
   const prisma = new PrismaClient()
-  const res: TeardownProps = { dropDB: null }
+  const res: TeardownProps = { dropDB: false }
   try {
     res.dropDB = await prisma.$runCommandRaw({ dropDatabase: 1 })
   } catch (error) {
