@@ -36,7 +36,7 @@ const Navbar = ({ session }: { session: Session | null }) => {
         </Link>
         <div className='flex flex-row gap-2'>
           {session?.user ? null : <ThemeButton />}
-          <NavAuthBar session={session} />
+          <NavAuthBar />
         </div>
       </div>
     </>

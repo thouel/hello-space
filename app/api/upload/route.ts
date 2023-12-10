@@ -6,6 +6,8 @@ import options from '../auth/[...nextauth]/options'
 import { log } from '@logtail/next'
 import { revalidatePath } from 'next/cache'
 
+const VERCEL_STORAGE_URL = 'blob.vercel-storage.com'
+
 export async function POST(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url)
   const filename = searchParams.get('filename')
@@ -13,7 +15,6 @@ export async function POST(request: Request): Promise<NextResponse> {
   const session = await getServerSession(options)
   const isAvatar = folder === 'avatar'
   const isBanner = folder === 'banner'
-  const VERCEL_STORAGE_URL = 'blob.vercel-storage.com'
 
   if (!session || !session.user) {
     return NextResponse.redirect('/auth/login')
@@ -104,8 +105,10 @@ export async function DELETE(request: Request): Promise<NextResponse> {
     throw new Error('No file provided')
   }
 
-  // Remove from storage
-  await del(url)
+  if (url.includes(VERCEL_STORAGE_URL)) {
+    // Remove from storage
+    await del(url)
+  }
 
   // Remove from user
   let data = {}

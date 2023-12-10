@@ -6,19 +6,17 @@
 
 ## Func
 
-- filter pictures with keyword (and search & highlight the keyword in title, copyright, explanation)
-
 - once signedin :
 
+  - allow to like/unlike
   - update profile picture + profile banner
 
-    - allow to remove avatar
-    - add loading indicator while processing uploads / deletes on banner & avatar
-    - handle the refresh of banner or avatar without reloading entirely the page (react-query?)
+    - add 'profile picture not found' image
 
   - droit à l'oubli
   - rgpd
 
+- filter pictures with keyword (and search & highlight the keyword in title, copyright, explanation)
 - add a shop to buy the pictures we liked on t-shirts, sweats, mugs or plates
 
 ## Tests

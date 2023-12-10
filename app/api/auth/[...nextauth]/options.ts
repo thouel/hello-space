@@ -65,6 +65,7 @@ import type { NextAuthOptions } from 'next-auth'
 import { randomBytes, randomUUID } from 'crypto'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import prisma from '@/lib/db/db'
+import { log } from '@logtail/next'
 
 const options = {
   adapter: PrismaAdapter(prisma),
@@ -113,7 +114,54 @@ const options = {
     maxAge: 60 * 60 * 24,
   },
 
-  callbacks: {},
+  callbacks: {
+    async jwt({ token, account, profile, session, trigger }) {
+      log.debug('jwt', { token, account, profile, session, trigger })
+
+      if (trigger === 'update') {
+        token.picture = session.picture
+        token.banner = session.banner
+      }
+
+      if (trigger === 'signIn' || trigger === 'signUp') {
+        try {
+          const userInDb = await prisma.user.findUniqueOrThrow({
+            where: { name: token.name ?? '' },
+          })
+
+          // Get the account avatar
+          let accountAvatar
+          if (account?.provider === 'github') {
+            accountAvatar = profile.avatar_url
+          } else if (account?.provider === 'reddit') {
+            //TODO: add the reddit avatar
+          } else if (account?.provider === 'discord') {
+            //TODO: add the discord avatar
+          }
+
+          token.picture = userInDb.image ?? accountAvatar
+
+          token.banner = userInDb.bannerPicture
+        } catch (e) {
+          log.error('Error during initializing user session', { e })
+        }
+      }
+
+      log.debug('ending jwt', { token, account, profile, session, trigger })
+      return token
+    },
+    async session({ session, token, user }) {
+      log.debug('session', { session, token, user })
+
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          banner: token.banner,
+        },
+      }
+    },
+  },
   pages: { signIn: '/auth/login' },
 } satisfies NextAuthOptions
 

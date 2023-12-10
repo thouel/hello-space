@@ -17,6 +17,8 @@ export default async function ProfilePage() {
     redirect('/')
   }
 
+  log.info('session user', { sessionUser })
+
   const user = await prisma.user.findUniqueOrThrow({
     where: { name: sessionUser.name ?? '' },
     include: {

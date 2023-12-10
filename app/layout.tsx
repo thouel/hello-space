@@ -7,6 +7,7 @@ import Navbar from '@/components/main/Navbar'
 import Footer from '@/components/main/Footer'
 import { getServerSession } from 'next-auth'
 import options from '@/app/api/auth/[...nextauth]/options'
+import { useSession } from 'next-auth/react'
 
 const inter = Inter({ subsets: ['latin'] })
 

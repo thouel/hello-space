@@ -1,13 +1,17 @@
 import { styles } from '@/constants/styles'
-import { Session } from 'next-auth'
+import { Session, getServerSession } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai'
 import { CgProfile } from 'react-icons/cg'
 import ThemeMenuItem from './ThemeMenuItem'
+import { log } from '@logtail/next'
+import options from '@/app/api/auth/[...nextauth]/options'
+import { useSession } from 'next-auth/react'
 
-const NavAuthBar = ({ session }: { session: Session | null }) => {
+const NavAuthBar = () => {
+  const { data: session } = useSession(options)
   if (!session?.user) {
     return (
       <>
