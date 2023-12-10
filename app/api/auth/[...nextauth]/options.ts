@@ -132,7 +132,7 @@ const options = {
           // Get the account avatar
           let accountAvatar
           if (account?.provider === 'github') {
-            accountAvatar = profile.avatar_url
+            accountAvatar = profile?.avatar_url
           } else if (account?.provider === 'reddit') {
             //TODO: add the reddit avatar
           } else if (account?.provider === 'discord') {
