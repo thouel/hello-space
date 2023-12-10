@@ -5,11 +5,10 @@ import React from 'react'
 import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai'
 import { CgProfile } from 'react-icons/cg'
 import ThemeMenuItem from './ThemeMenuItem'
-import options from '@/app/api/auth/[...nextauth]/options'
 import { useSession } from 'next-auth/react'
 
 const NavAuthBar = () => {
-  const { data: session } = useSession(options)
+  const { data: session } = useSession({ required: false })
   if (!session?.user) {
     return (
       <>

@@ -10,7 +10,7 @@
 // import Bungie from "next-auth/providers/bungie"
 // import Cognito from "next-auth/providers/cognito"
 // import Coinbase from "next-auth/providers/coinbase"
-import Discord from 'next-auth/providers/discord'
+import Discord, { DiscordProfile } from 'next-auth/providers/discord'
 // import Dropbox from "next-auth/providers/dropbox"
 // import DuendeIDS6 from "next-auth/providers/duende-identity-server6"
 // import Eveonline from "next-auth/providers/eveonline"
@@ -21,7 +21,7 @@ import Discord from 'next-auth/providers/discord'
 // import Freshbooks from "next-auth/providers/freshbooks"
 // import Fusionauth from "next-auth/providers/fusionauth"
 // import Gitlab from "next-auth/providers/gitlab"
-import Github from 'next-auth/providers/github'
+import Github, { GithubProfile } from 'next-auth/providers/github'
 // import Google from "next-auth/providers/google"
 // import Hubspot from "next-auth/providers/hubspot"
 // import Instagram from "next-auth/providers/instagram"
@@ -132,11 +132,13 @@ const options = {
           // Get the account avatar
           let accountAvatar
           if (account?.provider === 'github') {
-            accountAvatar = profile?.avatar_url
+            const gh = profile as GithubProfile
+            accountAvatar = gh?.avatar_url
           } else if (account?.provider === 'reddit') {
             //TODO: add the reddit avatar
           } else if (account?.provider === 'discord') {
-            //TODO: add the discord avatar
+            const d = profile as DiscordProfile
+            accountAvatar = d.avatar
           }
 
           token.picture = userInDb.image ?? accountAvatar

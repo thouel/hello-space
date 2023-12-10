@@ -8,19 +8,18 @@ import Image from 'next/image'
 import { log } from '@logtail/next'
 import { Spinner } from './Spinner'
 import { useSession } from 'next-auth/react'
-import options from '@/app/api/auth/[...nextauth]/options'
 
 const Banner = ({
   banner: initialBanner,
 }: {
   banner: string | null | undefined
 }) => {
+  const { update, data: session } = useSession({ required: true })
   const inputFileRef = useRef<HTMLInputElement>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [banner, setBanner] = useState(initialBanner)
   const [blob, setBlob] = useState<PutBlobResult | null>(null)
   const [isAreaVisible, setAreaVisible] = useState<boolean>(false)
-  const { update, data: session } = useSession(options)
 
   const onFileChange = async (event: any) => {
     if (!session || !session.user) {

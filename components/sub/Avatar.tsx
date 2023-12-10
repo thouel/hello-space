@@ -7,19 +7,18 @@ import { FiUploadCloud } from 'react-icons/fi'
 import { Spinner } from './Spinner'
 import { TiDocumentDelete } from 'react-icons/ti'
 import { log } from '@logtail/next'
-import { UseSessionOptions, useSession } from 'next-auth/react'
-import options from '@/app/api/auth/[...nextauth]/options'
+import { useSession } from 'next-auth/react'
 
 const Avatar = ({
   image: initialImage,
 }: {
   image: string | null | undefined
 }) => {
+  const { update, data: session } = useSession({ required: true })
   const inputFileRef = useRef<HTMLInputElement>(null)
   const [avatar, setAvatar] = useState(initialImage)
   const [blob, setBlob] = useState<PutBlobResult | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { update, data: session } = useSession(options)
 
   const onFileChange = async (event: any) => {
     if (!session || !session.user) {
