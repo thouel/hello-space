@@ -9,6 +9,9 @@
 - once signedin :
 
   - allow to like/unlike
+
+    - add overlay when click on image
+
   - update profile picture + profile banner
 
     - add 'profile picture not found' image
