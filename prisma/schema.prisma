@@ -12,9 +12,8 @@ model Picture {
   id                  String        @id @default(auto()) @map("_id") @db.ObjectId
   createdAt           DateTime      @default(now())
   updatedAt           DateTime      @updatedAt
-  externalId          BigInt        @unique
   copyright           String
-  date                String //YYYY-MM-DD
+  date                String        @unique //YYYY-MM-DD
   explanation         String
   hdurl               String
   url                 String

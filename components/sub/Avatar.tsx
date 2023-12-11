@@ -52,8 +52,8 @@ const Avatar = ({
     // Update session
     session.user.image = newBlob.url
     update({
+      type: 'avatar',
       picture: newBlob.url,
-      banner: session.user.banner,
     })
 
     // Remove spinner
@@ -90,8 +90,8 @@ const Avatar = ({
     // Update session
     session.user.image = null
     update({
+      type: 'avatar',
       picture: session.user.image,
-      banner: session.user.banner,
     })
 
     // Make spinner not visible

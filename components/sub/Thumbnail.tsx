@@ -1,28 +1,48 @@
 'use client'
+import { updateLikes } from '@/actions/updateLikes'
 import { Picture } from '@/types'
 import {
   HandThumbUpIcon,
   InformationCircleIcon,
 } from '@heroicons/react/24/outline'
-import { log } from '@logtail/next'
+import { HandThumbUpIcon as HandThumbUpIconSolid } from '@heroicons/react/24/solid'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import Link from 'next/link'
+import { MouseEvent, useState } from 'react'
 
 export default function Thumbnail({ picture }: { picture: Picture }) {
-  const router = useRouter()
+  const { update, data: session } = useSession({ required: false })
   const [overlayVisible, setOverlayVisible] = useState(false)
+  const [isLiked, setIsLiked] = useState(() =>
+    session?.user.likes.includes(picture.date),
+  )
 
   const toggleOverlay = () => {
     setOverlayVisible(!overlayVisible)
   }
 
-  const like = () => {
-    log.info('like', { picture })
-  }
+  const like = async (e: MouseEvent) => {
+    if (!session || !session.user) {
+      return null
+    }
 
-  const details = () => {
-    router.push(`/p/${picture.date}`)
+    // Do not close overlay
+    e.stopPropagation()
+
+    // Perform the server action
+    await updateLikes(picture, isLiked)
+
+    // Update session
+    update({
+      type: 'likes',
+      likes: isLiked
+        ? session.user.likes.filter((l: string) => l !== picture.date)
+        : [...session.user.likes, picture.date],
+    })
+
+    // Update state
+    setIsLiked(!isLiked)
   }
 
   return (
@@ -46,11 +66,19 @@ export default function Thumbnail({ picture }: { picture: Picture }) {
             id='overlay'
           >
             <div className='flex gap-12 justify-evenly' id='overlay-content'>
-              <span onClick={() => like()}>
-                <HandThumbUpIcon className='w-8 h-8' />
-              </span>
-              <span onClick={() => details()}>
-                <InformationCircleIcon className='w-8 h-8' />
+              {session?.user && (
+                <span onClick={(e) => like(e)}>
+                  {isLiked ? (
+                    <HandThumbUpIconSolid className='w-8 h-8' />
+                  ) : (
+                    <HandThumbUpIcon className='w-8 h-8' />
+                  )}
+                </span>
+              )}
+              <span>
+                <Link href={`/p/${picture.date}`}>
+                  <InformationCircleIcon className='w-8 h-8' />
+                </Link>
               </span>
             </div>
           </div>

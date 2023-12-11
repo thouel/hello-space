@@ -58,7 +58,7 @@ const Banner = ({
     }
 
     update({
-      picture: session?.user.image,
+      type: 'banner',
       banner: newBlob.url,
     })
 
@@ -99,7 +99,7 @@ const Banner = ({
       banner: null,
     }
     update({
-      picture: session?.user.image,
+      type: 'banner',
       banner: null,
     })
 

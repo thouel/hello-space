@@ -1,15 +1,23 @@
-import { getServerSession } from 'next-auth'
-import options from '@/app/api/auth/[...nextauth]/options'
-import SignInProviders from '@/components/sub/SignInProviders'
-import { redirect } from 'next/navigation'
 import { log } from '@logtail/next'
 import { getBaseUrl } from '@/lib/ui-helper'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
+import SignInProviders from '@/components/sub/SignInProviders'
 import SignInError from '@/components/sub/SignInError'
+import options from '@/app/api/auth/[...nextauth]/options'
 
-export default async function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
   const session = await getServerSession(options)
+  const callbackUrl = searchParams['callbackUrl']
 
   if (session?.user) {
+    if (callbackUrl && typeof callbackUrl === 'string') {
+      redirect(`${callbackUrl}?fromLogin=1`)
+    }
     redirect('/')
   }
 

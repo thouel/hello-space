@@ -6,8 +6,16 @@ declare module 'next-auth' {
    */
   interface Session {
     user: {
-      /** The user's banner image. */
+      // The Default Session's user object holds
+      // name: the name
+      // email: the email
+      // image: the avatar's url
+
+      // The user's banner image
       banner: string
+
+      // The user's liked pictures
+      likes: string[]
     } & DefaultSession['user']
   }
 }

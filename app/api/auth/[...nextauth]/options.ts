@@ -116,20 +116,29 @@ const options = {
 
   callbacks: {
     async jwt({ token, account, profile, session, trigger }) {
-      log.debug('jwt', { token, account, profile, session, trigger })
+      // log.debug('jwt', { token, account, profile, session, trigger })
 
       if (trigger === 'update') {
-        token.picture = session.picture
-        token.banner = session.banner
+        log.debug('in jwt update', { session, token })
+        if (session.type === 'likes') {
+          token.likes = session.likes
+        } else if (session.type === 'avatar') {
+          token.picture = session.picture
+        } else if (session.type === 'banner') {
+          token.banner = session.banner
+        }
       }
 
       if (trigger === 'signIn' || trigger === 'signUp') {
         try {
           const userInDb = await prisma.user.findUniqueOrThrow({
             where: { name: token.name ?? '' },
+            include: {
+              picturesLiked: true,
+            },
           })
 
-          // Get the account avatar
+          // Search the user's default avatar depending on its provider
           let accountAvatar
           if (account?.provider === 'github') {
             const gh = profile as GithubProfile
@@ -141,25 +150,31 @@ const options = {
             accountAvatar = d.avatar
           }
 
+          // Get the user's avatar
           token.picture = userInDb.image ?? accountAvatar
 
+          // Get the user's banner
           token.banner = userInDb.bannerPicture
+
+          // Get the user's liked pictures
+          token.likes = userInDb.picturesLiked.map((pl) => pl.date)
         } catch (e) {
           log.error('Error during initializing user session', { e })
         }
       }
 
-      log.debug('ending jwt', { token, account, profile, session, trigger })
+      // log.debug('ending jwt', { token, account, profile, session, trigger })
       return token
     },
     async session({ session, token, user }) {
-      log.debug('session', { session, token, user })
+      // log.debug('session', { session, token, user })
 
       return {
         ...session,
         user: {
           ...session.user,
           banner: token.banner,
+          likes: token.likes,
         },
       }
     },
