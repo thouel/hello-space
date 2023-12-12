@@ -7,6 +7,7 @@ import Thumbnail from '../sub/Thumbnail'
 import { fetchPictures } from '@/actions/fetchPictures'
 import { Spinner } from '../sub/Spinner'
 import { toast } from 'react-toastify'
+import { useSession } from 'next-auth/react'
 
 export interface InfinitePicturesProps {
   initialPictures: Picture[]
@@ -16,6 +17,7 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
   const [page, setPage] = useState(1)
   const [ref, inView] = useInView()
   const isLoading = useRef(false)
+  const { data: session } = useSession({ required: true })
 
   const loadMorePictures = async () => {
     isLoading.current = true
@@ -57,6 +59,8 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
               (a, b) =>
                 strToDate(b.date).getTime() - strToDate(a.date).getTime(),
             )
+            .filter((pi) => pi.media_type === 'image')
+            .filter((pi) => session?.user.likes.includes(pi.date))
             .map((p) => <Thumbnail key={p.title} picture={p} />)
         ) : (
           <div className='text-xl font-bold'>No pictures available !!</div>

@@ -9,14 +9,19 @@ import { HandThumbUpIcon as HandThumbUpIconSolid } from '@heroicons/react/24/sol
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MouseEvent, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 
 export default function Thumbnail({ picture }: { picture: Picture }) {
   const { update, data: session } = useSession({ required: false })
   const [overlayVisible, setOverlayVisible] = useState(false)
-  const [isLiked, setIsLiked] = useState(() =>
-    session?.user.likes.includes(picture.date),
-  )
+  const [isLiked, setIsLiked] = useState(false)
+
+  useEffect(() => {
+    function initializeIsLiked() {
+      setIsLiked(session?.user.likes.includes(picture.date))
+    }
+    initializeIsLiked()
+  }, [session?.user.likes, picture.date])
 
   const toggleOverlay = () => {
     setOverlayVisible(!overlayVisible)

@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react'
 import ThemeButton from '../sub/ThemeButton'
 import { RocketLaunchIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import { Session } from 'next-auth'
 import { styles } from '@/constants/styles'
 import NavAuthBar from '../sub/NavAuthBar'
+import { useSession } from 'next-auth/react'
 
-const Navbar = ({ session }: { session: Session | null }) => {
+const Navbar = () => {
+  const { data: session } = useSession({ required: false })
   const [isVisible, setIsVisible] = useState(true)
 
   const toggleVisibility = () => {
