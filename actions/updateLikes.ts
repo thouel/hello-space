@@ -5,6 +5,7 @@ import prisma from '@/lib/db/db'
 import { Picture } from '@/types'
 import { log } from '@logtail/next'
 import { getServerSession } from 'next-auth'
+import { revalidatePath } from 'next/cache'
 
 export const updateLikes = async (
   picture: Picture,
@@ -14,7 +15,7 @@ export const updateLikes = async (
 
   if (!session || !session.user) {
     log.error('You need to be signed in before performing this action')
-    return 0
+    return
   }
 
   if (isCurrentlyLiked) {
@@ -60,5 +61,8 @@ export const updateLikes = async (
       `Added connection between ${session.user.name} and picture ${picture.date}`,
     )
   }
-  return 0
+
+  revalidatePath('/s/liked')
+
+  return
 }

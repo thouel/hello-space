@@ -29,9 +29,9 @@ const BackToTopButton = () => {
         onClick={scrollToTop}
         className={`${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } bg-white hover:bg-black hover:text-white focus:ring-black dark:focus:ring-white inline-flex items-center rounded-full p-3 text-black dark:text-black hover:dark:text-white shadow-sm transition-opacity focus:outline-none focus:ring-2`}
+        } bg-white hover:bg-black hover:text-white focus:ring-black dark:focus:ring-white inline-flex items-center rounded-full p-1 text-black dark:text-black hover:dark:text-white shadow-sm transition-opacity focus:outline-none focus:ring-2`}
       >
-        <ArrowUpCircleIcon className='w-10 h-10' aria-hidden='true' />
+        <ArrowUpCircleIcon className='w-14 h-14' aria-hidden='true' />
       </button>
     </div>
   )

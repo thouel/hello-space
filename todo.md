@@ -8,10 +8,8 @@
 
 - once signedin :
 
-  - allow to like/unlike
-
-    - add overlay when click on image
-
+  - store infinite scroll in localStorage
+  - add liked page
   - update profile picture + profile banner
 
     - add 'profile picture not found' image

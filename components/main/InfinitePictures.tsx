@@ -7,7 +7,9 @@ import Thumbnail from '../sub/Thumbnail'
 import { fetchPictures } from '@/actions/fetchPictures'
 import { Spinner } from '../sub/Spinner'
 import { toast } from 'react-toastify'
+import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+import { CiHeart } from 'react-icons/ci'
 
 export interface InfinitePicturesProps {
   initialPictures: Picture[]
@@ -17,7 +19,8 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
   const [page, setPage] = useState(1)
   const [ref, inView] = useInView()
   const isLoading = useRef(false)
-  const { data: session } = useSession({ required: true })
+  const [autoRefresh, setAutoRefresh] = useState(true)
+  const { data: session } = useSession({ required: false })
 
   const loadMorePictures = async () => {
     isLoading.current = true
@@ -44,31 +47,53 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
     isLoading.current = false
   }
 
+  const preparePictures = () => {
+    return pictures
+      .sort((a, b) => strToDate(b.date).getTime() - strToDate(a.date).getTime())
+      .filter((pi) => pi.media_type === 'image')
+  }
+
   useEffect(() => {
-    if (inView && !isLoading.current) {
+    if (autoRefresh && inView && !isLoading.current) {
       loadMorePictures()
     }
   })
 
   return (
     <>
+      <div className='flex flex-row justify-evenly'>
+        {session && (
+          <Link href={'/s/liked'} className='label label-text'>
+            <CiHeart className='w-6 h-6' />
+            Liked
+          </Link>
+        )}
+        <div className='form-control'>
+          <label className='cursor-pointer label'>
+            <span className='label-text'>Infinite scroll</span>
+            <input
+              type='checkbox'
+              className='ml-2 toggle'
+              checked={autoRefresh}
+              onChange={() => {
+                setAutoRefresh(!autoRefresh)
+              }}
+            />
+          </label>
+        </div>
+      </div>
       <div className='columns-2 gap-x-1'>
         {pictures ? (
-          pictures
-            .sort(
-              (a, b) =>
-                strToDate(b.date).getTime() - strToDate(a.date).getTime(),
-            )
-            .filter((pi) => pi.media_type === 'image')
-            .filter((pi) => session?.user.likes.includes(pi.date))
-            .map((p) => <Thumbnail key={p.title} picture={p} />)
+          preparePictures().map((p) => <Thumbnail key={p.title} picture={p} />)
         ) : (
           <div className='text-xl font-bold'>No pictures available !!</div>
         )}
       </div>
-      <div className='flex items-center justify-center w-full p-4' ref={ref}>
-        <Spinner />
-      </div>
+      {autoRefresh && (
+        <div className='flex items-center justify-center w-full p-4' ref={ref}>
+          <Spinner />
+        </div>
+      )}
     </>
   )
 }

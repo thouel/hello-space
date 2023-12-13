@@ -1,6 +1,10 @@
 import { fetchPictures } from '@/actions/fetchPictures'
 import InfinitePictures from '@/components/main/InfinitePictures'
 import BackToTopButton from '@/components/sub/BackToTopButton'
+import Title from '@/components/sub/Title'
+
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export default async function Home() {
   const { isError, message, data } = await fetchPictures(1)
@@ -11,9 +15,7 @@ export default async function Home() {
 
   return (
     <>
-      <h1 data-test='title' className='mb-4 text-xl font-bold text-center'>
-        Hello Space & Astronomy
-      </h1>
+      <Title />
       <InfinitePictures initialPictures={data} />
       <BackToTopButton />
     </>

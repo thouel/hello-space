@@ -1,7 +1,6 @@
 import { displayDate } from '@/lib/ui-helper'
 import { Picture } from '@/types'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 
 const PictureCard = ({ picture }: { picture: Picture }) => {
