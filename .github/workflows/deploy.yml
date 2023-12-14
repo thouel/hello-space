@@ -4,7 +4,6 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
   NASA_API_SECRET: ${{ secrets.NASA_API_SECRET }}
-  NEXTAUTH_URL: ${{vars.NEXTAUTH_URL}}
   NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
   AUTH_GITHUB_ID: ${{secrets.AUTH_GITHUB_ID}}
   AUTH_GITHUB_SECRET: ${{secrets.AUTH_GITHUB_SECRET}}
@@ -45,7 +44,6 @@ jobs:
         continue-on-error: true
         run: |
           vercel env rm NASA_API_SECRET production --yes --token=${{ secrets.VERCEL_TOKEN }}
-          vercel env rm NEXTAUTH_URL production --yes --token=${{secrets.VERCEL_TOKEN}}
           vercel env rm NEXTAUTH_SECRET production --yes --token=${{secrets.VERCEL_TOKEN}}
           vercel env rm AUTH_GITHUB_ID production --yes --token=${{secrets.VERCEL_TOKEN}}
           vercel env rm AUTH_GITHUB_SECRET production --yes --token=${{secrets.VERCEL_TOKEN}}
@@ -57,7 +55,6 @@ jobs:
       - name: Push environment variable to Vercel
         run: |
           echo -n ${{ env.NASA_API_SECRET }} | vercel env add NASA_API_SECRET production --token=${{ secrets.VERCEL_TOKEN }}
-          echo -n ${{ env.NEXTAUTH_URL }} | vercel env add NEXTAUTH_URL production --token=${{ secrets.VERCEL_TOKEN }}
           echo -n ${{ env.NEXTAUTH_SECRET }} | vercel env add NEXTAUTH_SECRET production --token=${{ secrets.VERCEL_TOKEN }}
           echo -n ${{ env.AUTH_GITHUB_ID }} | vercel env add AUTH_GITHUB_ID production --token=${{ secrets.VERCEL_TOKEN }}
           echo -n ${{ env.AUTH_GITHUB_SECRET }} | vercel env add AUTH_GITHUB_SECRET production --token=${{ secrets.VERCEL_TOKEN }}
