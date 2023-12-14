@@ -63,6 +63,7 @@ export const updateLikes = async (
   }
 
   revalidatePath('/s/liked')
+  revalidatePath('/')
 
   return
 }

@@ -3,16 +3,24 @@ import { Picture } from '@/types'
 import { HandThumbDownIcon } from '@heroicons/react/24/solid'
 import { EllipsisHorizontalCircleIcon } from '@heroicons/react/24/outline'
 import { updateLikes } from '@/actions/updateLikes'
-import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 type Props = {
   picture: Picture
 }
 
 const PictureCardActions = (props: Props) => {
-  const router = useRouter()
+  const { data: session, update } = useSession({ required: true })
+
   const removeLike = async (picture: Picture) => {
+    // Update likes in DB
     await updateLikes(picture, true)
+
+    // Update session
+    update({
+      type: 'likes',
+      likes: session?.user.likes.filter((l: string) => l !== picture.date),
+    })
   }
 
   const moreFromArtist = (picture: Picture) => {

@@ -43,8 +43,8 @@ const LikedPictures = (props: Props) => {
       //Nothing to do here, the array already arrives in that order
     }
 
-    log.info('props', { likedPictures: props.likedPictures })
-    log.info('copy', { copy })
+    // log.info('props', { likedPictures: props.likedPictures })
+    // log.info('copy', { copy })
     return copy
   }, [props, sort])
 
