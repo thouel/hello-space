@@ -8,8 +8,7 @@
 
 - once signedin :
 
-  - store infinite scroll in localStorage
-  - add liked page
+  - close menus when clicked : on profile picture, on sort
   - update profile picture + profile banner
 
     - add 'profile picture not found' image

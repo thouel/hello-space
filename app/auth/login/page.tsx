@@ -20,10 +20,16 @@ export default async function LoginPage({
     }
     redirect('/')
   }
-
+  log.debug('before providers')
   const providers = await fetch(`${getBaseUrl()}/api/auth/providers`)
-    .then((res) => res.json())
-    .then((body) => body)
+    .then((res) => {
+      log.debug('in res', { res })
+      return res.json()
+    })
+    .then((body) => {
+      log.debug('in body', { body })
+      return body
+    })
   log.debug('providers rcvd', { providers })
 
   return (

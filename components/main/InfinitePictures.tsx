@@ -19,7 +19,7 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
   const [page, setPage] = useState(1)
   const [ref, inView] = useInView()
   const isLoading = useRef(false)
-  const [autoRefresh, setAutoRefresh] = useState(true)
+  const [autoRefresh, setAutoRefresh] = useState<boolean>()
   const { data: session } = useSession({ required: false })
 
   const loadMorePictures = async () => {
@@ -54,6 +54,10 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
   }
 
   useEffect(() => {
+    setAutoRefresh(localStorage.getItem('autoRefresh') === 'true')
+  }, [])
+
+  useEffect(() => {
     if (autoRefresh && inView && !isLoading.current) {
       loadMorePictures()
     }
@@ -76,6 +80,11 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
               className='ml-2 toggle'
               checked={autoRefresh}
               onChange={() => {
+                // we set it at the opposite value because react is going to change it after
+                localStorage.setItem(
+                  'autoRefresh',
+                  autoRefresh ? 'false' : 'true',
+                )
                 setAutoRefresh(!autoRefresh)
               }}
             />
