@@ -4,13 +4,20 @@ import { useTheme } from 'next-themes'
 const ThemeMenuItem = () => {
   const { theme, setTheme } = useTheme()
 
+  const onClickTheme = (e: any): void => {
+    e.preventDefault()
+    document
+      .getElementById('theme')
+      ?.setAttribute('checked', theme === 'dark' ? 'true' : 'false')
+  }
+
   const handleThemeChange = (e: any): void => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
   }
 
   return (
     <>
-      <div className='form-control'>
+      <div className='form-control' onClick={handleThemeChange}>
         <input
           type='checkbox'
           className='toggle toggle-xs'
@@ -20,9 +27,7 @@ const ThemeMenuItem = () => {
           id='theme'
         />
       </div>
-      <label htmlFor='theme' onClick={handleThemeChange}>
-        Switch theme
-      </label>
+      <label htmlFor='theme'>Switch theme</label>
     </>
   )
 }

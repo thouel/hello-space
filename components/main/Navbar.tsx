@@ -1,11 +1,11 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import ThemeButton from '../sub/ThemeButton'
 import { RocketLaunchIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { styles } from '@/constants/styles'
 import NavAuthBar from '../sub/NavAuthBar'
 import { useSession } from 'next-auth/react'
+import { ModeToggle } from '../sub/ModeToggle'
 
 const Navbar = () => {
   const { data: session } = useSession({ required: false })
@@ -36,7 +36,7 @@ const Navbar = () => {
           </p>
         </Link>
         <div className='flex flex-row gap-2'>
-          {session?.user ? null : <ThemeButton />}
+          <ModeToggle />
           <NavAuthBar />
         </div>
       </div>

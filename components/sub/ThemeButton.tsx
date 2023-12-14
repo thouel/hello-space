@@ -3,6 +3,7 @@ import React, { ChangeEvent } from 'react'
 import { useTheme } from 'next-themes'
 import { styles } from '@/constants/styles'
 
+//TODO: deprecated
 const ThemeButton = () => {
   const { theme, setTheme } = useTheme()
 

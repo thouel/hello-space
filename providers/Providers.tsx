@@ -1,6 +1,6 @@
 'use client'
 
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider } from '@/providers/ThemeProvider'
 import ToastProvider from './ToastProvider'
 import { SessionProvider } from 'next-auth/react'
 
@@ -12,7 +12,8 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
-          enableSystem={true}
+          enableSystem
+          disableTransitionOnChange
         >
           <ToastProvider />
           {children}

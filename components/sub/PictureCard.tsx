@@ -1,39 +1,52 @@
-import { displayDate } from '@/lib/ui-helper'
+import React from 'react'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
 import { Picture } from '@/types'
 import Image from 'next/image'
-import React from 'react'
+import { displayDate } from '@/lib/ui-helper'
+import { Badge } from '../ui/badge'
 import PictureCardActions from './PictureCardActions'
 
-const PictureCard = ({ picture }: { picture: Picture }) => {
+type PictureCardProps = { picture: Picture }
+
+const PictureCard = (props: PictureCardProps) => {
+  const { picture } = props
   return (
-    <div className='shadow-xl card lg:card-side'>
-      <figure>
-        {picture.media_type === 'image' ? (
-          <Image
-            src={picture.hdurl?.toString() ?? picture.url.toString()}
-            width={1000}
-            height={1000}
-            alt={picture.title}
-            className=''
-          />
-        ) : null}
-      </figure>
-      <div className='max-w-full px-2 py-1 card-body'>
-        <h2 className='mb-2 text-lg card-title'>
-          <p>{picture.title}</p>
-        </h2>
+    <Card className='overflow-hidden shadow-2xl rounded-xl'>
+      <CardHeader className='p-0 m-0'>
+        <CardTitle>
+          {picture.media_type === 'image' ? (
+            <Image
+              src={picture.hdurl?.toString() ?? picture.url.toString()}
+              width={1000}
+              height={1000}
+              alt={picture.title}
+              className=''
+            />
+          ) : null}
+          <p className='m-2'>{picture.title}</p>
+        </CardTitle>
+        <CardDescription></CardDescription>
+      </CardHeader>
+      <CardContent>
         <div className='mb-2 text-sm text-justify'>{picture.explanation}</div>
-        <div className='flex flex-row justify-between mb-4 text-xs sm:text-sm md:text-base'>
-          <div className='w-3/5 h-full badge badge-sm badge-outline'>
+        <div className='flex flex-row justify-between text-xs sm:text-sm md:text-base'>
+          <Badge className='w-3/5' variant='secondary'>
             &copy; {picture.copyright}
-          </div>
-          <div className='h-full badge badge-sm badge-outline'>
-            {displayDate(picture.date)}
-          </div>
+          </Badge>
+          <Badge variant='secondary'>{displayDate(picture.date)}</Badge>
         </div>
+      </CardContent>
+      <CardFooter>
         <PictureCardActions picture={picture} />
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   )
 }
 

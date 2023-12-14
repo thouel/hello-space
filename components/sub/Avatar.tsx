@@ -8,6 +8,19 @@ import { Spinner } from './Spinner'
 import { TiDocumentDelete } from 'react-icons/ti'
 import { log } from '@logtail/next'
 import { useSession } from 'next-auth/react'
+import { Button } from '../ui/button'
+import { Label } from '../ui/label'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '../ui/alert-dialog'
 
 const Avatar = ({
   image: initialImage,
@@ -111,19 +124,45 @@ const Avatar = ({
             width={96}
             height={96}
             alt='Profile picture'
+            className='overflow-hidden rounded-lg'
           />
 
           <form>
             <div className='flex flex-row gap-1'>
-              <label htmlFor='file' className='text-xs btn btn-sm btn-primary'>
-                <FiUploadCloud className='inline w-4 h-4' />
-              </label>
-              <label
-                className='text-xs btn btn-outline btn-sm'
-                onClick={removeAvatar}
-              >
-                <TiDocumentDelete className='w-4 h-4' />
-              </label>
+              <Button asChild>
+                <Label htmlFor='file' className=''>
+                  <FiUploadCloud className='inline w-4 h-4' />
+                </Label>
+              </Button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant='destructive'
+                    disabled={!avatar && !blob ? true : false}
+                  >
+                    <TiDocumentDelete className='w-4 h-4' />
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you sure you want to remove this one from your
+                      favourites?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      No worries ! You will be able to find it later.
+                      <br />
+                      Perhaps..
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>No</AlertDialogCancel>
+                    <AlertDialogAction onClick={removeAvatar}>
+                      Yes
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
             <input
               type='file'

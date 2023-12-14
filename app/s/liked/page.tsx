@@ -1,7 +1,8 @@
 import { fetchLikedPictures } from '@/actions/fetchLikedPictures'
 import options from '@/app/api/auth/[...nextauth]/options'
 import LikedPictures from '@/components/main/LikedPictures'
-import BackToHome from '@/components/sub/BackToHome'
+import BackButton from '@/components/sub/BackButton'
+import BackHome from '@/components/sub/BackHome'
 import BackToTopButton from '@/components/sub/BackToTopButton'
 import SortPictures from '@/components/sub/SortPictures'
 import Title from '@/components/sub/Title'
@@ -18,7 +19,7 @@ const LikedPage = async (props: Props) => {
     <>
       <Title />
       <div className='flex flex-row justify-between gap-2'>
-        <BackToHome />
+        <BackButton />
         <SortPictures />
       </div>
       <LikedPictures likedPictures={pictures} />

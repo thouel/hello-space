@@ -1,5 +1,6 @@
 import options from '@/app/api/auth/[...nextauth]/options'
 import Avatar from '@/components/sub/Avatar'
+import BackButton from '@/components/sub/BackButton'
 import Banner from '@/components/sub/Banner'
 import prisma from '@/lib/db/db'
 import { log } from '@logtail/next'
@@ -30,6 +31,7 @@ export default async function ProfilePage() {
   return (
     <>
       <div className='flex flex-col gap-4'>
+        <BackButton />
         <Banner banner={user?.bannerPicture} />
         <div className='flex flex-row gap-4'>
           <Avatar image={sessionUser.image} />

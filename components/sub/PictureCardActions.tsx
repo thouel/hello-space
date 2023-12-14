@@ -4,6 +4,18 @@ import { HandThumbDownIcon } from '@heroicons/react/24/solid'
 import { EllipsisHorizontalCircleIcon } from '@heroicons/react/24/outline'
 import { updateLikes } from '@/actions/updateLikes'
 import { useSession } from 'next-auth/react'
+import { Button } from '../ui/button'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '../ui/alert-dialog'
 
 type Props = {
   picture: Picture
@@ -33,23 +45,45 @@ const PictureCardActions = (props: Props) => {
   }
 
   return (
-    <div className='flex flex-row justify-between w-full gap-2 mb-2'>
-      {session && (
-        <div
-          className='flex-1 btn btn-primary'
-          onClick={() => removeLike(props.picture)}
+    <>
+      <div className='flex flex-row justify-between w-full gap-2'>
+        {session && (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant='destructive'>
+                <HandThumbDownIcon className='inline w-6 h-6 mr-1' />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  Are you sure you want to remove this one from your favourites?
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  No worries ! You will be able to find it later.
+                  <br />
+                  Perhaps..
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>No</AlertDialogCancel>
+                <AlertDialogAction onClick={() => removeLike(props.picture)}>
+                  Yes
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        )}
+        <Button
+          className='flex-1 grow'
+          variant='outline'
+          onClick={() => moreFromArtist(props.picture)}
         >
-          <HandThumbDownIcon className='inline w-6 h-6' />
-          Remove
-        </div>
-      )}
-      <div
-        className='flex-1 btn btn-outline'
-        onClick={() => moreFromArtist(props.picture)}
-      >
-        <EllipsisHorizontalCircleIcon className='inline w-6 h-6' />+ from Artist
+          <EllipsisHorizontalCircleIcon className='inline w-6 h-6 mr-1' />
+          <span className=''>More from this artist</span>
+        </Button>
       </div>
-    </div>
+    </>
   )
 }
 

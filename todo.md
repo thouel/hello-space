@@ -1,8 +1,8 @@
 # Hello Space TODO List
 
-## CI/CD
+## clean your room
 
-- on Vercel, why the /api/auth/providers is not accessible (401 / fetch failed)
+- Remove components using daisyui -> marked as deprecated
 
 ## Func
 
@@ -14,6 +14,7 @@
   - on picturecard: passer buttons compatible with dark mode
   - update profile picture + profile banner
 
+    - add confirmation dialog on avatar removal and banner removal
     - add 'profile picture not found' image
 
   - droit à l'oubli

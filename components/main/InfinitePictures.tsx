@@ -7,9 +7,9 @@ import Thumbnail from '../sub/Thumbnail'
 import { fetchPictures } from '@/actions/fetchPictures'
 import { Spinner } from '../sub/Spinner'
 import { toast } from 'react-toastify'
-import Link from 'next/link'
 import { useSession } from 'next-auth/react'
-import { CiHeart } from 'react-icons/ci'
+import { Switch } from '../ui/switch'
+import { Label } from '../ui/label'
 
 export interface InfinitePicturesProps {
   initialPictures: Picture[]
@@ -65,31 +65,17 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
 
   return (
     <>
-      <div className='flex flex-row justify-evenly'>
-        {session && (
-          <Link href={'/s/liked'} className='label label-text'>
-            <CiHeart className='w-6 h-6' />
-            Liked
-          </Link>
-        )}
-        <div className='form-control'>
-          <label className='cursor-pointer label'>
-            <span className='label-text'>Infinite scroll</span>
-            <input
-              type='checkbox'
-              className='ml-2 toggle'
-              checked={autoRefresh}
-              onChange={() => {
-                // we set it at the opposite value because react is going to change it after
-                localStorage.setItem(
-                  'autoRefresh',
-                  autoRefresh ? 'false' : 'true',
-                )
-                setAutoRefresh(!autoRefresh)
-              }}
-            />
-          </label>
-        </div>
+      <div className='flex flex-row items-center justify-end mb-2 space-x-2'>
+        <Switch
+          id='autoRefresh'
+          checked={autoRefresh}
+          onCheckedChange={() => {
+            // we set it at the opposite value because react is going to change it after
+            localStorage.setItem('autoRefresh', autoRefresh ? 'false' : 'true')
+            setAutoRefresh(!autoRefresh)
+          }}
+        />
+        <Label htmlFor='autoRefresh'>Infinite scroll</Label>
       </div>
       <div className='columns-2 gap-x-1'>
         {pictures ? (

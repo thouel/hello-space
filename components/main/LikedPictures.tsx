@@ -6,7 +6,6 @@ import { TbCameraQuestion } from 'react-icons/tb'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { strToDate } from '@/lib/ui-helper'
-import { log } from '@logtail/next'
 
 type Props = {
   likedPictures: Picture[]

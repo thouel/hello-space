@@ -3,50 +3,36 @@ import { signIn } from 'next-auth/react'
 import { RxDiscordLogo, RxGithubLogo } from 'react-icons/rx'
 import { PiRedditLogo } from 'react-icons/pi'
 import { log } from '@logtail/next'
+import { Button } from '../ui/button'
 
 const SignInProviders = ({ providers }: { providers: any }) => {
-  log.warn('in SignInProviders > before providers check')
   if (!providers) {
     return null
   }
 
   const styles = {
-    btn: 'w-full btn btn-primary',
-    logo: 'w-6 h-6',
+    logo: 'w-6 h-6 mr-2',
   }
-  log.warn('in SignInProviders > before return')
   return (
     <>
       {providers.github ? (
-        <button
-          data-test='github'
-          className={styles.btn}
-          onClick={() => signIn('github')}
-        >
+        <Button onClick={() => signIn('github')} data-test='github'>
           <RxGithubLogo className={styles.logo} />
           Sign in with GitHub
-        </button>
+        </Button>
       ) : null}
       {providers.discord ? (
-        <button
-          data-test='discord'
-          className={styles.btn}
-          onClick={() => signIn('discord')}
-        >
+        <Button data-test='discord' onClick={() => signIn('discord')}>
           <RxDiscordLogo className={styles.logo} />
           Sign in with Discord
-        </button>
+        </Button>
       ) : null}
 
       {providers.reddit ? (
-        <button
-          data-test='reddit'
-          className={styles.btn}
-          onClick={() => signIn('reddit')}
-        >
+        <Button data-test='reddit' onClick={() => signIn('reddit')}>
           <PiRedditLogo className={styles.logo} />
           Sign in with Reddit
-        </button>
+        </Button>
       ) : null}
     </>
   )

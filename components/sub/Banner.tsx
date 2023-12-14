@@ -8,6 +8,18 @@ import Image from 'next/image'
 import { log } from '@logtail/next'
 import { Spinner } from './Spinner'
 import { useSession } from 'next-auth/react'
+import { Button } from '../ui/button'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '../ui/alert-dialog'
 
 const Banner = ({
   banner: initialBanner,
@@ -114,29 +126,66 @@ const Banner = ({
           <Spinner />
         </div>
       ) : (
-        <div className='flex flex-col w-full gap-2 text-xs'>
+        <div className='flex flex-col w-full gap-2 '>
           {blob ? (
-            <Image src={blob.url} alt='Blob picture' width={375} height={96} />
+            <Image
+              src={blob.url}
+              alt='Blob picture'
+              width={375}
+              height={96}
+              className='overflow-hidden text-xs rounded-lg'
+            />
           ) : null}
           {!blob && banner ? (
-            <Image src={banner} alt='Banner picture' width={375} height={96} />
+            <Image
+              src={banner}
+              alt='Banner picture'
+              width={375}
+              height={96}
+              className='overflow-hidden text-xs rounded-lg'
+            />
           ) : null}
 
-          <div className='flex flex-row gap-1'>
-            <p
-              className='w-1/2 text-xs btn btn-primary btn-sm'
+          <div className='flex flex-row justify-between gap-1'>
+            <Button
+              className='text-xs grow'
               onClick={() => setAreaVisible(!isAreaVisible)}
             >
               <FiUploadCloud className='inline w-4 h-4 mr-2' />
               Update Banner
-            </p>
-            <p
-              className='w-1/2 text-xs btn btn-outline btn-sm'
-              onClick={removeBanner}
-            >
-              <TiDocumentDelete className='w-4 h-4 mr-2' />
-              Remove Banner
-            </p>
+            </Button>
+
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant='destructive'
+                  disabled={!banner && !blob ? true : false}
+                  className='text-xs'
+                >
+                  <TiDocumentDelete className='w-4 h-4 mr-2' />
+                  Remove
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    Are you sure you want to remove this one from your
+                    favourites?
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    No worries ! You will be able to find it later.
+                    <br />
+                    Perhaps..
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>No</AlertDialogCancel>
+                  <AlertDialogAction onClick={removeBanner}>
+                    Yes
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
           {isAreaVisible === true ? (
             <div className='flex flex-col w-full p-2 text-sm text-center text-gray-600 border-4 border-gray-400 border-dashed rounded-lg dark:border-gray-200'>
