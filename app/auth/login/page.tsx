@@ -11,7 +11,9 @@ export default async function LoginPage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined }
 }) {
+  log.warn('before session')
   const session = await getServerSession(options)
+  log.warn('before callbackUrl')
   const callbackUrl = searchParams['callbackUrl']
 
   if (session?.user) {

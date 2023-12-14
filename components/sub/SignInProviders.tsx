@@ -2,8 +2,10 @@
 import { signIn } from 'next-auth/react'
 import { RxDiscordLogo, RxGithubLogo } from 'react-icons/rx'
 import { PiRedditLogo } from 'react-icons/pi'
+import { log } from '@logtail/next'
 
 const SignInProviders = ({ providers }: { providers: any }) => {
+  log.warn('in SignInProviders > before providers check')
   if (!providers) {
     return null
   }
@@ -12,7 +14,7 @@ const SignInProviders = ({ providers }: { providers: any }) => {
     btn: 'w-full btn btn-primary',
     logo: 'w-6 h-6',
   }
-
+  log.warn('in SignInProviders > before return')
   return (
     <>
       {providers.github ? (

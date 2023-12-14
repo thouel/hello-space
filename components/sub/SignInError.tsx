@@ -1,5 +1,6 @@
 'use client'
 
+import { log } from '@logtail/next'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
@@ -21,8 +22,9 @@ const Errors = {
 }
 
 export default function SignInError() {
+  log.warn('in SignInError > before useSearchParams')
   const error = useSearchParams().get('error')
-
+  log.warn('in SignInError > before useEffect')
   useEffect(() => {
     if (!error) {
       return
@@ -34,6 +36,6 @@ export default function SignInError() {
       toast.error(errorMessage)
     }
   })
-
+  log.warn('in SignInError > before return')
   return <></>
 }
