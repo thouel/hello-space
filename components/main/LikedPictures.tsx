@@ -58,7 +58,7 @@ const LikedPictures = (props: Props) => {
         <>
           <div className='my-4 mb-12'>
             {pictures.map((p) => (
-              <div key={p.date} className='mb-2'>
+              <div key={p.date} className='flex flex-col mb-2'>
                 <PictureCard picture={p} />
               </div>
             ))}

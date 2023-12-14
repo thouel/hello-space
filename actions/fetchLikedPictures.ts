@@ -1,64 +1,31 @@
 'use server'
 import { Picture, PictureResult } from '@/types'
 import { log } from '@logtail/next'
-import NasaApiClient from '@/lib/NasaApiClient'
+import prisma from '@/lib/db/db'
 
 export const fetchLikedPictures = async (
-  dates: string[],
+  userId: string,
 ): Promise<Picture[]> => {
-  log.debug(`fetchLikedPictures with dates=${dates}`)
+  log.debug(`fetchLikedPictures with userId=${userId}`)
 
-  let pictures: Picture[] = []
-
-  for (let i = 0; i < dates.length; i++) {
-    const res: PictureResult = await callApi({ date: dates[i] })
-    if (res && res.data) {
-      pictures.push(res.data)
-    }
-  }
+  const pictures: Picture[] = await prisma.picture.findMany({
+    select: {
+      copyright: true,
+      date: true,
+      explanation: true,
+      hdurl: true,
+      url: true,
+      media_type: true,
+      service_version: true,
+      title: true,
+    },
+    where: {
+      userIDs: {
+        has: userId,
+      },
+    },
+  })
 
   // log.debug('fetchLikedPictures', { pictures })
   return pictures
-}
-
-interface CallApiProps {
-  date: string
-}
-
-const isValidDate = (date: string): boolean => {
-  const dateRegex = /^\d{4}-\d{2}-\d{2}$/
-  return dateRegex.test(date)
-}
-
-const callApi = async (props: CallApiProps) => {
-  log.info('callApi with', props)
-  var res: PictureResult = {
-    message: '',
-    data: null,
-    isError: false,
-  }
-
-  const { date } = props
-
-  if (date === undefined) {
-    throw new Error('No date found')
-  }
-
-  if (!isValidDate(date)) {
-    throw new Error('Date is not valid')
-  }
-
-  const client = new NasaApiClient()
-  await client
-    .fetchOne(date)
-    .then((r) => r.json())
-    .then((data) => {
-      res.data = data
-      res.isError = false
-    })
-    .catch((e: any) => {
-      throw new Error(e.message)
-    })
-
-  return res
 }

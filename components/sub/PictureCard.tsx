@@ -2,6 +2,7 @@ import { displayDate } from '@/lib/ui-helper'
 import { Picture } from '@/types'
 import Image from 'next/image'
 import React from 'react'
+import PictureCardActions from './PictureCardActions'
 
 const PictureCard = ({ picture }: { picture: Picture }) => {
   return (
@@ -30,6 +31,7 @@ const PictureCard = ({ picture }: { picture: Picture }) => {
             {displayDate(picture.date)}
           </div>
         </div>
+        <PictureCardActions picture={picture} />
       </div>
     </div>
   )

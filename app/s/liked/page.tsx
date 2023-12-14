@@ -12,7 +12,7 @@ type Props = {}
 
 const LikedPage = async (props: Props) => {
   const session = await getServerSession(options)
-  const pictures = await fetchLikedPictures(session?.user.likes)
+  const pictures = await fetchLikedPictures(session?.user.id)
 
   return (
     <>

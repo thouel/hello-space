@@ -138,6 +138,9 @@ const options = {
             },
           })
 
+          // The user id
+          token.id = userInDb.id
+
           // Search the user's default avatar depending on its provider
           let accountAvatar
           if (account?.provider === 'github') {
@@ -173,6 +176,7 @@ const options = {
         ...session,
         user: {
           ...session.user,
+          id: token.id,
           banner: token.banner,
           likes: token.likes,
         },

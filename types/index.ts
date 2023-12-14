@@ -2,8 +2,8 @@ export type Picture = {
   copyright: string
   date: string //YYYY-MM-DD
   explanation: string
-  hdurl: URL
-  url: URL
+  hdurl: string
+  url: string
   media_type: string
   service_version: string
   title: string
