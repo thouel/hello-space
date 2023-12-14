@@ -12,16 +12,16 @@ export default async function LoginPage({
   searchParams: { [key: string]: string | string[] | undefined }
 }) {
   log.warn('before session')
-  // const session = await getServerSession(options)
+  const session = await getServerSession(options)
   log.warn('before callbackUrl')
-  // const callbackUrl = searchParams['callbackUrl']
+  const callbackUrl = searchParams['callbackUrl']
 
-  // if (session?.user) {
-  //   if (callbackUrl && typeof callbackUrl === 'string') {
-  //     redirect(`${callbackUrl}?fromLogin=1`)
-  //   }
-  //   redirect('/')
-  // }
+  if (session?.user) {
+    if (callbackUrl && typeof callbackUrl === 'string') {
+      redirect(`${callbackUrl}?fromLogin=1`)
+    }
+    redirect('/')
+  }
   log.warn('before providers')
   // const providers = await fetch(`${getBaseUrl()}/api/auth/providers`)
   //   .then((res) => {
