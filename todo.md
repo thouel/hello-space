@@ -9,6 +9,9 @@
 - once signedin :
 
   - close menus when clicked : on profile picture, on sort
+  - on / : passer liked link + infinite scroll compatible with dark mode
+  - on /s/liked : passer homepage link + sort button compatible with dark mode
+  - on picturecard: passer buttons compatible with dark mode
   - update profile picture + profile banner
 
     - add 'profile picture not found' image

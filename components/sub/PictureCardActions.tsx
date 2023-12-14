@@ -10,7 +10,7 @@ type Props = {
 }
 
 const PictureCardActions = (props: Props) => {
-  const { data: session, update } = useSession({ required: true })
+  const { data: session, update } = useSession({ required: false })
 
   const removeLike = async (picture: Picture) => {
     // Update likes in DB
@@ -34,13 +34,15 @@ const PictureCardActions = (props: Props) => {
 
   return (
     <div className='flex flex-row justify-between w-full gap-2 mb-2'>
-      <div
-        className='flex-1 btn btn-primary'
-        onClick={() => removeLike(props.picture)}
-      >
-        <HandThumbDownIcon className='inline w-6 h-6' />
-        Remove
-      </div>
+      {session && (
+        <div
+          className='flex-1 btn btn-primary'
+          onClick={() => removeLike(props.picture)}
+        >
+          <HandThumbDownIcon className='inline w-6 h-6' />
+          Remove
+        </div>
+      )}
       <div
         className='flex-1 btn btn-outline'
         onClick={() => moreFromArtist(props.picture)}

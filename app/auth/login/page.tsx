@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation'
 import SignInProviders from '@/components/sub/SignInProviders'
 import SignInError from '@/components/sub/SignInError'
 import options from '@/app/api/auth/[...nextauth]/options'
+import { getProviders } from 'next-auth/react'
 
 export default async function LoginPage({
   searchParams,
@@ -23,25 +24,25 @@ export default async function LoginPage({
     redirect('/')
   }
   log.warn('before providers')
-  const providers = await fetch(`${getBaseUrl()}/api/auth/providers`)
-    .then((res) => {
-      log.warn('in res', { res })
-      return res.json()
-    })
-    .then((body) => {
-      log.warn('in body', { body })
-      return body
-    })
+  const providers = await getProviders()
+  // const providers = await fetch(`${getBaseUrl()}/api/auth/providers`)
+  //   .then((res) => {
+  //     log.warn('in res', { res })
+  //     return res.json()
+  //   })
+  //   .then((body) => {
+  //     log.warn('in body', { body })
+  //     return body
+  //   })
   log.warn('providers rcvd', { providers })
 
   return (
     <>
       <p className='mb-2 text-center'>You choose the way you hop in</p>
       <div className='flex flex-col w-full gap-2 p-2 border border-gray-400 rounded-lg shadow-lg '>
-        Providers here
-        {/* <SignInProviders providers={providers} /> */}
+        <SignInProviders providers={providers} />
       </div>
-      {/* <SignInError /> */}
+      <SignInError />
     </>
   )
 }
