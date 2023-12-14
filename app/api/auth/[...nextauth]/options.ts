@@ -68,6 +68,7 @@ import prisma from '@/lib/db/db'
 import { log } from '@logtail/next'
 
 const options = {
+  debug: true,
   adapter: PrismaAdapter(prisma),
   theme: {
     logo: 'https://next-auth.js.org/img/logo/logo-sm.png',
