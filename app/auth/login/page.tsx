@@ -23,16 +23,16 @@ export default async function LoginPage({
     redirect('/')
   }
   log.warn('before providers')
-  // const providers = await fetch(`${getBaseUrl()}/api/auth/providers`)
-  //   .then((res) => {
-  //     log.warn('in res', { res })
-  //     return res.json()
-  //   })
-  //   .then((body) => {
-  //     log.warn('in body', { body })
-  //     return body
-  //   })
-  // log.warn('providers rcvd', { providers })
+  const providers = await fetch(`${getBaseUrl()}/api/auth/providers`)
+    .then((res) => {
+      log.warn('in res', { res })
+      return res.json()
+    })
+    .then((body) => {
+      log.warn('in body', { body })
+      return body
+    })
+  log.warn('providers rcvd', { providers })
 
   return (
     <>

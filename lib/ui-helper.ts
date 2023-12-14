@@ -10,19 +10,21 @@ export function isTokenAuthorized(token: string) {
 }
 
 export function getBaseUrl() {
+  log.debug(`getBaseUrl begin`)
+
   // if window is not undefined, we are running in the browser env (client side)
   if (typeof window !== 'undefined') return ''
 
   var res = ''
 
   const vc = process.env.VERCEL_URL
-  log.debug('getBaseUrl', { vc })
+  log.debug(`getBaseUrl vc=${vc}`)
   if (vc) {
     res = `https://${vc}`
   } else {
     res = `${process.env.LOCAL_URL}`
   }
-  log.debug('getBaseUrl', { res })
+  log.debug(`getBaseUrl res=${res}`)
   return res
 }
 
