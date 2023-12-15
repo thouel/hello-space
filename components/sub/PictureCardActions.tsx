@@ -1,6 +1,6 @@
 'use client'
 import { Picture } from '@/types'
-import { HandThumbDownIcon } from '@heroicons/react/24/solid'
+import { HandThumbDownIcon, HandThumbUpIcon } from '@heroicons/react/24/solid'
 import { EllipsisHorizontalCircleIcon } from '@heroicons/react/24/outline'
 import { updateLikes } from '@/actions/updateLikes'
 import { useSession } from 'next-auth/react'
@@ -23,6 +23,10 @@ type Props = {
 
 const PictureCardActions = (props: Props) => {
   const { data: session, update } = useSession({ required: false })
+
+  const isLiked = session
+    ? session.user.likes.includes(props.picture.date)
+    : false
 
   const removeLike = async (picture: Picture) => {
     // Update likes in DB
@@ -47,33 +51,39 @@ const PictureCardActions = (props: Props) => {
   return (
     <>
       <div className='flex flex-row justify-between w-full gap-2'>
-        {session && (
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant='destructive'>
-                <HandThumbDownIcon className='inline w-6 h-6 mr-1' />
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>
-                  Are you sure you want to remove this one from your favourites?
-                </AlertDialogTitle>
-                <AlertDialogDescription>
-                  No worries ! You will be able to find it later.
-                  <br />
-                  Perhaps..
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>No</AlertDialogCancel>
-                <AlertDialogAction onClick={() => removeLike(props.picture)}>
-                  Yes
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        )}
+        {session &&
+          (!isLiked ? (
+            <Button variant='default'>
+              <HandThumbUpIcon className='inline w-6 h-6 mr-1' />
+            </Button>
+          ) : (
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant='destructive'>
+                  <HandThumbDownIcon className='inline w-6 h-6 mr-1' />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    Are you sure you want to remove this one from your
+                    favourites?
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    No worries ! You will be able to find it later.
+                    <br />
+                    Perhaps..
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>No</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => removeLike(props.picture)}>
+                    Yes
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          ))}
         <Button
           className='flex-1 grow'
           variant='outline'

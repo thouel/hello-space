@@ -1,17 +1,12 @@
 'use client'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { BsSortUp } from 'react-icons/bs'
-import { BsSortDown } from 'react-icons/bs'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import Link from 'next/link'
 import { Button } from '../ui/button'
 
 type Props = {}
@@ -55,7 +50,7 @@ const SortPictures = (props: Props) => {
             <span>Sort</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className='mr-1 font-normal bg-white rounded-lg shadow-xl w-52'>
+        <DropdownMenuContent className='mr-1 font-normal bg-white rounded-lg shadow-xl w-52 dark:text-white dark:bg-gray-700'>
           <DropdownMenuItem
             className='p-1 pl-3'
             onClick={() => setSort('p-desc')}

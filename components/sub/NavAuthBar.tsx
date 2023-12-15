@@ -40,25 +40,25 @@ const NavAuthBar = (props: Props) => {
           <AvatarFallback>PP</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='mr-1 font-normal bg-white rounded-lg shadow-xl w-52'>
-        <DropdownMenuLabel className='px-2 py-1 font-semibold'>
+      <DropdownMenuContent className='mb-1 mr-1 font-normal bg-white rounded-lg shadow-xl dark:bg-gray-700 dark:text-white w-52 '>
+        <DropdownMenuLabel className='px-2 pt-2 pb-1 font-semibold cursor-pointer'>
           My Account
         </DropdownMenuLabel>
-        <DropdownMenuSeparator className='h-px my-1 -mx-1 bg-muted' />
-        <DropdownMenuItem className='p-1 pl-3'>
+        <DropdownMenuSeparator className='h-px my-1 bg-muted dark:bg-slate-400' />
+        <DropdownMenuItem className='p-1 pl-3 m-1 rounded-lg hover:dark:bg-gray-800 hover:bg-slate-100'>
           <Link href={'/s/liked'} className=''>
             <HeartIcon className='inline w-4 h-4 mr-2' />
             <span>Liked pictures</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className='p-1 pl-3'>
+        <DropdownMenuItem className='p-1 pl-3 m-1 rounded-lg hover:dark:bg-gray-800 hover:bg-slate-100'>
           <Link href={'/s/profile'}>
             <IoPersonCircleOutline className='inline w-4 h-4 mr-2' />
             Profile
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuSeparator className='h-px my-1 -mx-1 bg-muted' />
-        <DropdownMenuItem className='p-1 pl-3'>
+        <DropdownMenuSeparator className='h-px my-1 bg-muted dark:bg-slate-400' />
+        <DropdownMenuItem className='p-1 pl-3 m-1 rounded-lg hover:dark:bg-gray-800 hover:bg-slate-100'>
           <Link href={'/api/auth/signout'}>
             <AiOutlineLogout className='inline w-4 h-4 mr-2' />
             Log out

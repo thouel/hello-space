@@ -188,9 +188,9 @@ const Banner = ({
             </AlertDialog>
           </div>
           {isAreaVisible === true ? (
-            <div className='flex flex-col w-full p-2 text-sm text-center text-gray-600 border-4 border-gray-400 border-dashed rounded-lg dark:border-gray-200'>
+            <div className='flex flex-col w-full p-2 text-sm text-center text-gray-600 border-4 border-gray-400 border-dashed rounded-lg dark:border-gray-200 dark:text-gray-300'>
               <form>
-                <label htmlFor='banner' className='font-bold'>
+                <label htmlFor='banner' className='font-semibold'>
                   <FiUploadCloud className='inline w-6 h-6 mr-2' />
                   Click to update your banner
                 </label>
