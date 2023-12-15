@@ -16,6 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '../ui/alert-dialog'
+import { useEffect, useState } from 'react'
 
 type Props = {
   picture: Picture
@@ -23,20 +24,26 @@ type Props = {
 
 const PictureCardActions = (props: Props) => {
   const { data: session, update } = useSession({ required: false })
+  const [isLiked, setIsLiked] = useState<boolean>()
 
-  const isLiked = session
-    ? session.user.likes.includes(props.picture.date)
-    : false
+  const updateLike = async (picture: Picture, isLiked: boolean | undefined) => {
+    if (!session || isLiked === undefined) {
+      return
+    }
 
-  const removeLike = async (picture: Picture) => {
     // Update likes in DB
-    await updateLikes(picture, true)
+    await updateLikes(picture, isLiked)
 
     // Update session
     update({
       type: 'likes',
-      likes: session?.user.likes.filter((l: string) => l !== picture.date),
+      likes: isLiked
+        ? session.user.likes.filter((l: string) => l !== picture.date)
+        : [...session.user.likes, picture.date],
     })
+
+    // Update state
+    setIsLiked(!isLiked)
   }
 
   const moreFromArtist = (picture: Picture) => {
@@ -48,12 +55,22 @@ const PictureCardActions = (props: Props) => {
     window.open(`${url}?${searchParams.toString()}`, '_blank')
   }
 
+  useEffect(() => {
+    function initializeIsLiked() {
+      setIsLiked(session?.user.likes.includes(props.picture.date))
+    }
+    initializeIsLiked()
+  }, [session?.user.likes, props.picture.date])
+
   return (
     <>
       <div className='flex flex-row justify-between w-full gap-2'>
         {session &&
           (!isLiked ? (
-            <Button variant='default'>
+            <Button
+              variant='default'
+              onClick={() => updateLike(props.picture, isLiked)}
+            >
               <HandThumbUpIcon className='inline w-6 h-6 mr-1' />
             </Button>
           ) : (
@@ -77,7 +94,9 @@ const PictureCardActions = (props: Props) => {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>No</AlertDialogCancel>
-                  <AlertDialogAction onClick={() => removeLike(props.picture)}>
+                  <AlertDialogAction
+                    onClick={() => updateLike(props.picture, isLiked)}
+                  >
                     Yes
                   </AlertDialogAction>
                 </AlertDialogFooter>
