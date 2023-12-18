@@ -75,7 +75,9 @@ const InfinitePictures = (props: InfinitePicturesProps) => {
             setAutoRefresh(!autoRefresh)
           }}
         />
-        <Label htmlFor='autoRefresh'>Infinite scroll</Label>
+        <Label htmlFor='autoRefresh' className='cursor-pointer'>
+          Infinite scroll
+        </Label>
       </div>
       <div className='columns-2 gap-x-1'>
         {pictures ? (

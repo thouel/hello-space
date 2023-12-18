@@ -49,7 +49,7 @@ const Banner = ({
     setIsLoading(true)
 
     // Update banner
-    const file = inputFileRef.current.files[0]
+    const file: File = inputFileRef.current.files[0]
     const response = await fetch(
       `/api/upload?folder=banner&filename=${file.name}`,
       {
@@ -131,8 +131,8 @@ const Banner = ({
             <Image
               src={blob.url}
               alt='Blob picture'
-              width={375}
-              height={96}
+              width={1080}
+              height={720}
               className='overflow-hidden text-xs rounded-lg'
             />
           ) : null}
@@ -140,8 +140,8 @@ const Banner = ({
             <Image
               src={banner}
               alt='Banner picture'
-              width={375}
-              height={96}
+              width={1080}
+              height={720}
               className='overflow-hidden text-xs rounded-lg'
             />
           ) : null}
@@ -197,13 +197,16 @@ const Banner = ({
                 <input
                   ref={inputFileRef}
                   type='file'
+                  accept='image'
                   className='hidden'
                   name='banner'
                   id='banner'
                   onChange={onFileChange}
                 />
               </form>
-              <p className='text-xs'>Images only, 4.5 Mb max</p>
+              <p className='text-xs'>
+                Images only (png, jpg, gif, svg), 4.5 Mb max
+              </p>
             </div>
           ) : null}
         </div>

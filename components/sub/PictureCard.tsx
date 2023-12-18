@@ -24,8 +24,8 @@ const PictureCard = (props: PictureCardProps) => {
           {picture.media_type === 'image' ? (
             <Image
               src={picture.hdurl?.toString() ?? picture.url.toString()}
-              width={1000}
-              height={1000}
+              width={1080}
+              height={720}
               alt={picture.title}
               className=''
             />

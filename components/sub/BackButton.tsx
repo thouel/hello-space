@@ -19,7 +19,7 @@ const BackButton = () => {
 
   return (
     <a onClick={() => goBack()}>
-      <ArrowLeftCircleIcon className='w-12 h-12 cursor-pointer text-base-700 hover:text-white/50' />
+      <ArrowLeftCircleIcon className='w-12 h-12 hover:cursor-pointer' />
     </a>
   )
 }

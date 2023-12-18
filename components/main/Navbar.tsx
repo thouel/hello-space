@@ -27,9 +27,9 @@ const Navbar = () => {
       <div
         className={`${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } flex flex-row justify-between transition-opacity min-h-[40px] h-[40px] text-sm font-semibold bg-white dark:bg-[#6800FF]`}
+        } flex flex-row justify-between transition-opacity min-h-[40px] h-[40px] text-sm font-semibold bg-white dark:bg-[rgba(102,0,255,0.44)]`}
       >
-        <Link href={'/'} className='mt-1'>
+        <Link href={'/'} className='mt-1 ml-1'>
           <p className={styles.clickEffect}>
             <RocketLaunchIcon className='inline-block w-6 h-6' />
             <span className='ml-1'>Hello Space</span>

@@ -23,7 +23,7 @@ export default async function RootLayout({
     <html lang='en'>
       <body
         className={cn(
-          'overflow-y-scroll overflow-x-hidden bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100',
+          'max-w-[1080px] overflow-y-scroll overflow-x-hidden bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100',
           inter.className,
         )}
       >

@@ -53,16 +53,17 @@ export default function Thumbnail({ picture }: { picture: Picture }) {
   return (
     <>
       <div
-        className='relative cursor-pointer'
+        className='relative w-full max-w-lg cursor-pointer'
         onClick={() => toggleOverlay()}
         id='image-container'
       >
         <Image
           src={picture.url?.toString()}
-          width={200}
-          height={200}
+          width={1080}
+          height={720}
           alt={picture.title}
           id='overlay-image'
+          sizes='(max-width: 768px) 100vw, 700px'
           className='w-full h-auto mb-1 rounded-lg shadow-xl'
         />
         {overlayVisible && (
