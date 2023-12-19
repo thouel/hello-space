@@ -1,17 +1,17 @@
-import { HomeIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
-import { Button } from '../ui/button'
+'use client'
+import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline'
+import { useRouter } from 'next/navigation'
 
 type Props = {}
 
 const BackHome = (props: Props) => {
+  const router = useRouter()
+
   return (
     <>
-      <Button asChild variant='outline'>
-        <Link href={'/'} className=''>
-          <HomeIcon className='w-8 h-8 cursor-pointer' />
-        </Link>
-      </Button>
+      <a onClick={() => router.push('/')}>
+        <ArrowLeftCircleIcon className='w-12 h-12 hover:cursor-pointer' />
+      </a>
     </>
   )
 }
